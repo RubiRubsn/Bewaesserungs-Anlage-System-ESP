@@ -134,15 +134,15 @@ Hier folgt in kürze ein Video
 2.2. nach dem du den Feuchte Sensor an den Pin A0 angelötet hast, musst du diesen Noch kallibrieren mit (im webbrowser auf einem gerät das im selben netzwerk ist): http.//IP_Des_ESP/kalibrierung?typ=0
     für Trocken und dann tue den Sensor ins wasser und http.//IP_Des_ESP/kalibrierung?typ=1 für nass. die IP des ESP muss im Haupt Server Eingetragen Werden.
 
-2.3 nach der Einrichtung stelle bei deinem Router ein, dass die IP des ESP8266 immer gleich bleibt.
+2.3. nach der Einrichtung stelle bei deinem Router ein, dass die IP des ESP8266 immer gleich bleibt.
 
 3. clone das Repository für den ventil Server und Trage SSID und Passwort deines Netzwerks ein. zusätzlich die anzahl der Genutzten Ventile und ob eine Pumpe verwendet wird und ob füllstand verwendet wird.
 
-3.1 flashe einen ESP8266 mit dieser Software und warte bis dieser sich mit deinem Router verbunden hat. verbinde die Relays mit dem im Code genannten Pins. 
+3.1. flashe einen ESP8266 mit dieser Software und warte bis dieser sich mit deinem Router verbunden hat. verbinde die Relays mit dem im Code genannten Pins. 
 
-3.2 trage die IP des Ventilservers im Hauptserver ein.
+3.2. trage die IP des Ventilservers im Hauptserver ein.
 
-3.3 nach der Einrichtung stelle bei deinem Router ein, dass die IP des ESP8266 immer gleich bleibt.
+3.3. nach der Einrichtung stelle bei deinem Router ein, dass die IP des ESP8266 immer gleich bleibt.
 
 Fertig!
 
