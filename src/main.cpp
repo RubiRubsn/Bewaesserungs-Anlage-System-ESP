@@ -1,7 +1,3 @@
-/*
-Um dieses Programm zu nutzen gehe in ESPUI.h (in libdeps/ESPUI) und vergrößere jsonInitialDocumentSize auf 20000
-*/
-
 #include <DNSServer.h>
 #include <Arduino.h>
 #include <ESPUI.h>
