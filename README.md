@@ -127,7 +127,7 @@ Hier folgt in kürze ein Video
 
 1.3 nach der Einrichtung stelle bei deinem Router ein, dass die IP des ESP32 immer gleich bleibt.
 
-2. clone das Repository für den Feuchte Server und Trage SSID und Passwort deines Netzwerks hier ein. 
+2. <a href="https://github.com/RubiRubsn/feuchte_server">clone das Repository für den Feuchte Server</a>  und Trage SSID und Passwort deines Netzwerks hier ein. 
 
 2.1. flashe einen ESP8266 mit dieser Software und warte bis dieser sich mit deinem Router verbunden hat.
 
@@ -136,7 +136,7 @@ Hier folgt in kürze ein Video
 
 2.3. nach der Einrichtung stelle bei deinem Router ein, dass die IP des ESP8266 immer gleich bleibt.
 
-3. clone das Repository für den ventil Server und Trage SSID und Passwort deines Netzwerks ein. zusätzlich die anzahl der Genutzten Ventile und ob eine Pumpe verwendet wird und ob füllstand verwendet wird.
+3. <a href="https://github.com/RubiRubsn/ventil_server">clone das Repository für den ventil Server </a> und Trage SSID und Passwort deines Netzwerks ein. zusätzlich die anzahl der Genutzten Ventile und ob eine Pumpe verwendet wird und ob füllstand verwendet wird.
 
 3.1. flashe einen ESP8266 mit dieser Software und warte bis dieser sich mit deinem Router verbunden hat. verbinde die Relays mit dem im Code genannten Pins. 
 
