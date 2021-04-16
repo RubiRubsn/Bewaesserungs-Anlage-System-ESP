@@ -116,37 +116,42 @@ Hier folgt in Kürze ein Video
 1.2 Der Server befindet sich nach dem ersten Einrichtungsschritt unter <Festgelegtername>.local/<br>
 1.3 Nach der Einrichtung stelle bei deinem Router ein, dass die IP des ESP32 immer gleich bleibt.<br><br>
 2. <a href="https://github.com/RubiRubsn/feuchte_server">Klone das Repository für den Feuchteserver</a>  und trage die SSID und das Passwort deines Netzwerks ein. 
-2.1(optional) lege den namen für den optionalen zugriff per mDNS ein.
+2.1(optional) Lege den Namen für den optionalen Zugriff per mDNS fest. (Version 1.0 des Hauptservers unterstützt noch keine mDNS Auflösung)<br>
 ```sh
 12 const char *SSID = "******";
 13 const char *PSW = "****";
-14 //hier die nr. des Sensors eintragen um eine einfachere handhabung bei der ip eingabe zu haben
+14 //hier den Namen des Sensors eintragen um eine einfachere Handhabung bei der IP-Eingabe zu haben
 15 const char *Nummnerierung_der_server = "Beet-vorm-fenster";
 ```
-2.1. flashe einen ESP8266 mit dieser Software und warte bis dieser sich mit deinem Router verbunden hat.
-
-2.2. nach dem du den Feuchte Sensor an den Pin A0 angelötet hast, musst du diesen Noch kallibrieren mit (im webbrowser auf einem gerät das im selben netzwerk ist): http.//IP_Des_ESP/kalibrierung?typ=0
-    für Trocken und dann tue den Sensor ins wasser und http.//IP_Des_ESP/kalibrierung?typ=1 für nass. die IP des ESP muss im Haupt Server Eingetragen Werden.
-
-2.3. nach der Einrichtung stelle bei deinem Router ein, dass die IP des ESP8266 immer gleich bleibt.
-
-3. <a href="https://github.com/RubiRubsn/ventil_server">clone das Repository für den ventil Server </a> und Trage SSID und Passwort deines Netzwerks ein. zusätzlich die anzahl der Genutzten Ventile und ob eine Pumpe verwendet wird und ob füllstand verwendet wird.
-
-3.1. flashe einen ESP8266 mit dieser Software und warte bis dieser sich mit deinem Router verbunden hat. verbinde die Relays mit dem im Code genannten Pins. 
-
-3.2. trage die IP des Ventilservers im Hauptserver ein.
-
-3.3. nach der Einrichtung stelle bei deinem Router ein, dass die IP des ESP8266 immer gleich bleibt.
+<br>
+2.2. Flashe einen ESP8266 mit dieser Software und warte bis dieser sich mit deinem Router verbunden hat.<br>
+2.3. Nach dem du den Feuchtesensor an den Pin A0 angelötet hast, musst du diesen noch kallibrieren mit (im Webbrowser auf einem Gerät das im selben Netzwerk ist): http://IP_Des_ESP/kalibrierung?typ=0 für "Trocken" und dann lege den Sensor ins Wasser und gebe http://IP_Des_ESP/kalibrierung?typ=1 für "Nass" ein. Die IP des ESP muss im Hauptserver eingetragen werden.<br>
+2.4. Nach der Einrichtung stelle bei deinem Router ein, dass die IP des ESP8266 immer gleich bleibt.<br>
+3. <a href="https://github.com/RubiRubsn/ventil_server">Klone das Repository für den Ventilserver </a> und trage die SSID und das Passwort deines Netzwerks ein. Zusätzlich die Anzahl der genutzten Ventile (Aktuell max 4 pro Ventilserver), ob eine Pumpe verwendet wird und ob Füllstandsmessung verwendet wird.<br>
+```sh
+8 const int anz_relays = 4;
+9 const bool pumpe = true;
+10 bool fuellstand_sensor = true;
+11 const int pumpe_pin = D5;
+12 const uint8_t Relay[anz_relays] = {D0, D1, D2, D4};
+13 const char *SSID = "****";
+14 const char *PSW = "****";
+15 //Hier die Nr. bzw Namen des Ventilservers eintragen um eine einfachere Handhabung bei der IP-Eingabe zu haben
+16 const char *Nummnerierung_der_server = "1";
+```
+<br>
+3.1. Flashe einen ESP8266 mit dieser Software und warte bis dieser sich mit deinem Router verbunden hat. Verbinde die Relaais mit dem im Code genannten Pins. (optional auch den Sensor an Pin A0)<br>
+3.2. Trage die IP des Ventilservers im Hauptserver ein.<br>
+3.3. Nach der Einrichtung stelle bei deinem Router ein, dass die IP des ESP8266 immer gleich bleibt.
 
 Fertig!
 
-Schalt diagramme Folgen noch
-
+Schaltdiagramme folgen noch
 
 ## Danksagung
 
 - <a href="https://github.com/s00500">s00500 zur Bereitstellung seiner genialen UI Lib</a>
-
+- meine Freunde Markus und Stephan zum Helfen bei vielen Sachen ^^
 
 
 
