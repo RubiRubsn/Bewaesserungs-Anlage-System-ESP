@@ -46,17 +46,15 @@
 
 Das ziehl dieser Software ist es, ein gut funktionierendes teil Automatisiertes Bewässerungssystem zu sein.
 Das system kann in 3 verschiedenen Modi Betrieben werden.
-Haloo test 123
 
+1. Manuell
+    im manuellen Modus wird keine Automatische bewässerung ausgeführt
 
-    1. Manuell
-        im manuellen Modus wird keine Automatische bewässerung ausgeführt
+2. Automatisiert mit feuchte Sensoren
+    Hier wird anhand von feuchtesensoren die Feuchte im Beet Gemessen und daran entschieden, ob bewässert werden soll.
 
-    2. Automatisiert mit feuchte Sensoren
-        Hier wird anhand von feuchtesensoren die Feuchte im Beet Gemessen und daran entschieden, ob bewässert werden soll.
-
-    3. Automatisiert mit feuchte Sensoren und Wetter vorhersage
-        Hier wird anhand von feuchtesensoren die Feuchte im Beet Gemessen und in zusammenspiel mit der Wettervorhersage entschieden, ob bewässert werden soll.
+3. Automatisiert mit feuchte Sensoren und Wetter vorhersage
+    Hier wird anhand von feuchtesensoren die Feuchte im Beet Gemessen und in zusammenspiel mit der Wettervorhersage entschieden, ob bewässert werden soll.
 
 !!ACHTUNG in Version 1.0 ist nur modi 3 und 1 Nutzbar!!
 
