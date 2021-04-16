@@ -45,7 +45,9 @@
 ## #über das Projekt
 
 Das ziehl dieser Software ist es, ein gut funktionierendes teil Automatisiertes Bewässerungssystem zu sein.
-Das system kann in 3 verschiedenen Modi Betrieben Werden.
+Das system kann in 3 verschiedenen Modi Betrieben werden.
+Haloo test 123
+
 
     1. Manuell
         im manuellen Modus wird keine Automatische bewässerung ausgeführt
