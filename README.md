@@ -23,13 +23,13 @@
 
 <!-- TABLE OF CONTENTS -->
 <details open="open">
-  <summary>Inhaltsverzeichniss</summary>
+  <summary>Inhaltsverzeichnis</summary>
   <ol>
     <li>
-      <a href="#über-das-Projekt">über das Projekt</a>
+      <a href="#Über-das-Projekt">Über das Projekt</a>
         <ul>
             <li><a href="#Details-zur-Oberfläche">Details zur Oberfläche</a></li>
-            <li><a href="#Was-Brauche-ich">Was Brauche ich</a></li>
+            <li><a href="#Was-brauche-ich">Was brauche ich?</a></li>
       </ul>
     </li>
     <li><a href="#Beispiele">Beispiele</a></li>
@@ -42,13 +42,13 @@
 
 <!-- ABOUT THE PROJECT -->
 
-## #über das Projekt
+## #Über das Projekt
 
-Das ziehl dieser Software ist es, ein gut funktionierendes teil Automatisiertes Bewässerungssystem zu sein.
-Das system kann in 3 verschiedenen Modi Betrieben werden.
+Das Ziel dieser Software ist es, ein gut funktionierendes teilautomatisiertes Bewässerungssystem zu sein.
+Das System kann in 3 verschiedenen Modi betrieben werden.
 
-1. Manuell
-    im manuellen Modus wird keine Automatische bewässerung ausgeführt
+1. Manuell \n
+    im manuellen Modus wird keine automatische Bewässerung ausgeführt
 
 2. Automatisiert mit feuchte Sensoren
     Hier wird anhand von feuchtesensoren die Feuchte im Beet Gemessen und daran entschieden, ob bewässert werden soll.
@@ -65,12 +65,11 @@ Es gibt 2 weitere typen von Servern, ein Feuchte Server und ein Ventil server. b
 Der feuchte server sendet auf anfrage des Hauptservers die Feuchte an den Server. Dieser Feuchte Server kann direkt am beet angebracht werden.
 der Ventil Server kann in 3 verschiedenen Modis betrieben werden.
 
-    1. nutzung von bis zu vier Ventilen pro server am Trinkwasseranschluss
+1. nutzung von bis zu vier Ventilen pro server am Trinkwasseranschluss
 
-    2. nutzung von bis zu vier Ventilen an einer Pumpe. diese Pumpe kann geschaltet werden.
+2. nutzung von bis zu vier Ventilen an einer Pumpe. diese Pumpe kann geschaltet werden.
 
-    3. nutzung von bis zu vier Ventilen an einer Pumpe. diese Pumpe kann geschaltet werden und zusätzliche überprüfung des Füllstandes, z.B. in
-       einem Regenfass um das Laufen im Trocknen zu verhindern.
+3. nutzung von bis zu vier Ventilen an einer Pumpe. diese Pumpe kann geschaltet werden und zusätzliche überprüfung des Füllstandes, z.B. in einem Regenfass um das Laufen im Trocknen zu verhindern.
 
 
 ### Details zur Oberfläche
@@ -91,7 +90,7 @@ Im Tab Beet Einstellungen kannst du alles zu den Beeten einstellen. wie, den Nam
 [![beet einst Screenshot][beeteinst-screenshot]]()
 
 
-### Was Brauche ich
+### Was brauche ich
 
 für die Nutzung der Oberfläche ist ein Kostenloser zugang zur <a href="https://openweathermap.org/api">Openweathermap API</a> notwendig.
 nach der Anmeldung erhälst du einen API schlüssel den du im einrichtungs Prozess in der Oberfläche eintragen kannst.
