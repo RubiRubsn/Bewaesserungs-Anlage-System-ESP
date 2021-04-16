@@ -117,12 +117,12 @@ Hier folgt in Kürze ein Video
 1.3 Nach der Einrichtung stelle bei deinem Router ein, dass die IP des ESP32 immer gleich bleibt.<br><br>
 2. <a href="https://github.com/RubiRubsn/feuchte_server">Klone das Repository für den Feuchteserver</a>  und trage die SSID und das Passwort deines Netzwerks ein. 
 2.1(optional) lege den namen für den optionalen zugriff per mDNS ein.
-<addr>
+```sh
 12 const char *SSID = "******";
 13 const char *PSW = "****";
 14 //hier die nr. des Sensors eintragen um eine einfachere handhabung bei der ip eingabe zu haben
 15 const char *Nummnerierung_der_server = "Beet-vorm-fenster";
-</addr>
+```
 2.1. flashe einen ESP8266 mit dieser Software und warte bis dieser sich mit deinem Router verbunden hat.
 
 2.2. nach dem du den Feuchte Sensor an den Pin A0 angelötet hast, musst du diesen Noch kallibrieren mit (im webbrowser auf einem gerät das im selben netzwerk ist): http.//IP_Des_ESP/kalibrierung?typ=0
