@@ -45,31 +45,31 @@
 ## #Über das Projekt
 
 Das Ziel dieser Software ist es, ein gut funktionierendes teilautomatisiertes Bewässerungssystem zu sein.
-Das System kann in 3 verschiedenen Modi betrieben werden.
+Das System kann in 3 verschiedenen Modi betrieben werden.<br>
 
 1. Manuell <br>
     im manuellen Modus wird keine automatische Bewässerung ausgeführt
 
-2. Automatisiert mit feuchte Sensoren
-    Hier wird anhand von feuchtesensoren die Feuchte im Beet Gemessen und daran entschieden, ob bewässert werden soll.
+2. Automatisiert mit Feuchtesensoren<br>
+    Hier wird anhand von Feuchtesensoren die Feuchte im Beet gemessen und daran entschieden, ob bewässert werden soll.
 
-3. Automatisiert mit feuchte Sensoren und Wetter vorhersage
-    Hier wird anhand von feuchtesensoren die Feuchte im Beet Gemessen und in zusammenspiel mit der Wettervorhersage entschieden, ob bewässert werden soll.
+3. Automatisiert mit Feuchtesensoren und Wetter vorhersage<br>
+    Hier wird anhand von Feuchtesensoren die Feuchte im Beet gemessen und in Zusammenspiel mit der Wettervorhersage entschieden, ob bewässert werden soll.
 
-!!ACHTUNG in Version 1.0 ist nur modi 3 und 1 Nutzbar!!
+<br>!!ACHTUNG in Version 1.0 ist nur Modi 3 und 1 Nutzbar!! <br><br>
 
-Als Haup Server dient ein ESP32 auf dem mithilfe der Bibliothek <a href="https://github.com/s00500/ESPUI">ESPUI von s00500</a> ein Webinterface gestaltet wurde.
-dieser Server sammelt die Fuchtewerte und plant auch die Bewässerung. Da dieser server nur die Bewässerung startet stoppt die bewässerung automatisch auch im falle eines Absturz des Systems.
-Dieser server kann mit freigaben auch an öffentlich erreichbar werden. ich habe dies mithilfe von <a href="https://myfritz.net/">MY!FRITZ</a> getan (setzt die nutzung einer Fritz!box voraus). 
-Es gibt 2 weitere typen von Servern, ein Feuchte Server und ein Ventil server. beide Server werden mit ESP8266 realisiert.
-Der feuchte server sendet auf anfrage des Hauptservers die Feuchte an den Server. Dieser Feuchte Server kann direkt am beet angebracht werden.
-der Ventil Server kann in 3 verschiedenen Modis betrieben werden.
+Als Hauptserver dient ein ESP32 auf dem mit Hilfe der Bibliothek <a href="https://github.com/s00500/ESPUI">ESPUI von s00500</a> ein Webinterface gestaltet wurde.
+Dieser Server sammelt die Feuchtewerte und plant auch die Bewässerung. Da dieser Server nur die Bewässerung startet, stoppt die Bewässerung automatisch auch im Falle eines Absturz des Systems.<br>
+Dieser Server kann mit Freigaben auch öffentlich erreicht werden. Ich habe dies mit Hilfe von <a href="https://myfritz.net/">MY!FRITZ</a> realisiert. (setzt die Nutzung einer Fritz!box voraus). <br>
+Es gibt 2 weitere Typen von Servern, ein Feuchteserver und ein Ventilserver. Beide Server werden mit ESP8266 realisiert.<br>
+Der Feuchteserver sendet auf Anfrage des Hauptservers die Feuchte an den Server. Dieser Feuchteserver kann direkt am Beet angebracht werden.
+Der Ventilserver kann in 3 verschiedenen Modis betrieben werden. <br>
 
-1. nutzung von bis zu vier Ventilen pro server am Trinkwasseranschluss
+1. Nutzung von bis zu vier Ventilen pro Server am Trinkwasseranschluss
 
-2. nutzung von bis zu vier Ventilen an einer Pumpe. diese Pumpe kann geschaltet werden.
+2. Nutzung von bis zu vier Ventilen an einer Pumpe. Diese Pumpe kann geschalten werden.
 
-3. nutzung von bis zu vier Ventilen an einer Pumpe. diese Pumpe kann geschaltet werden und zusätzliche überprüfung des Füllstandes, z.B. in einem Regenfass um das Laufen im Trocknen zu verhindern.
+3. Nutzung von bis zu vier Ventilen an einer Pumpe. Diese Pumpe kann geschalten werden in Abhängigkeit vom Füllstand, z.B. in einem Regenfass um das laufen der Pumpe im Trocknen zu verhindern.
 
 
 ### Details zur Oberfläche
