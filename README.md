@@ -147,9 +147,10 @@ Hier folgt in Kürze ein Video
 
 Fertig!
 
-Schaltdiagramme Ventilserver:<br>
+Schaltdiagramm Ventilserver:<br>
 [![ventil-schaltplan][ventil-schaltplan]]()
 <br>
+Schaltdiagramm Feuchteserver:<br>
 [![feuchte-schaltplan][feuchte-schaltplan]]()
 <br>
 
