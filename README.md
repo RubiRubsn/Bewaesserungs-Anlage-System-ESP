@@ -47,7 +47,7 @@
 Das Ziel dieser Software ist es, ein gut funktionierendes teilautomatisiertes Bewässerungssystem zu sein.
 Das System kann in 3 verschiedenen Modi betrieben werden.
 
-1. Manuell \n
+1. Manuell <br>
     im manuellen Modus wird keine automatische Bewässerung ausgeführt
 
 2. Automatisiert mit feuchte Sensoren
