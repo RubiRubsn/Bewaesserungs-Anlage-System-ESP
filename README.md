@@ -29,7 +29,7 @@
       <a href="#Über-das-Projekt">Über das Projekt</a>
         <ul>
             <li><a href="#Details-zur-Oberfläche">Details zur Oberfläche</a></li>
-            <li><a href="#Was-brauche-ich?">Was brauche ich?</a></li>
+            <li><a href="#Was-brauche-ich">Was brauche ich?</a></li>
       </ul>
     </li>
     <li><a href="#Beispiele">Beispiele</a></li>
@@ -90,7 +90,7 @@ Im Tab "Beete Einstellungen" kannst du alles zu den Beeten einstellen. wie: <br>
 [![beet einst Screenshot][beeteinst-screenshot]]()
 
 
-### Was brauche ich?
+### Was brauche ich
 
 Für die Nutzung der Oberfläche ist ein kostenloser Zugang zur <a href="https://openweathermap.org/api">Openweathermap API</a> notwendig.
 Nach der Anmeldung erhälst du einen API-Schlüssel den du im Einrichtungsprozess in der Weboberfläche eintragen kannst.<br>
@@ -102,25 +102,27 @@ Als Hauptserver habe ich den <a href="https://www.az-delivery.de/products/esp32-
 Als Server für die Feuchtigkeit habe ich <a href="https://www.az-delivery.de/products/nodemcu-lua-lolin-v3-modul-mit-esp8266-12e-unverlotet?_pos=28&_sid=f7dcaf8b6&_ss=r">ESP8266</a> verwendet.<br>
 Dazu nutze ich passende 5v Netzteile für die ESP´s und 12V Netzteile für die Ventile.<br>
 Als Bewässerungsschlauch habe ich den Perlschlauch von  <a href="https://cs-wss.com/">CS systeme</a> verwendet.<br>
-
-Dazu noch passend Rohre um zu den Beeten zu kommen.<br>
+Dazu noch passende Rohre um zu den Beeten zu kommen.<br>
 
 ## Beispiele
 <br>
 Hier folgt in Kürze ein Video
 <br>
 
-## Installation
-1.a. Lade dir das Releas firmware.bin File herunter und nutze  <a href="https://github.com/Grovkillen/ESP_Easy_Flasher">ESP_Easy_Flasher</a> um den File auf den Haupt Server zu Flashen.
-
-1.b. oder clone dieses Repository und flashe den File mit VSCode und Platform IO
-
-1.2. zum Einrichten gehe in das offene Netzwerk des ESP32.
-
-1.3 nach der Einrichtung stelle bei deinem Router ein, dass die IP des ESP32 immer gleich bleibt.
-
-2. <a href="https://github.com/RubiRubsn/feuchte_server">clone das Repository für den Feuchte Server</a>  und Trage SSID und Passwort deines Netzwerks hier ein. 
-
+## Installation <br>
+1.a. Lade dir aus dem <a href="https://github.com/RubiRubsn/Bewaesserungs-Anlage-System-ESP/releases">"Releas"</a> das File "firmware.bin" herunter und nutze  <a href="https://github.com/Grovkillen/ESP_Easy_Flasher">ESP_Easy_Flasher</a> um das File auf den Hauptserver zu flashen.<br>
+1.b. oder klone dieses Repository und flashe das File mit VSCode und Platform IO <br>
+1.1. Zum Einrichten gehe in das offene Netzwerk des ESP32. <br>
+1.2 Der Server befindet sich nach dem ersten Einrichtungsschritt unter <Festgelegtername>.local/<br>
+1.3 Nach der Einrichtung stelle bei deinem Router ein, dass die IP des ESP32 immer gleich bleibt.<br><br>
+2. <a href="https://github.com/RubiRubsn/feuchte_server">Klone das Repository für den Feuchteserver</a>  und trage die SSID und das Passwort deines Netzwerks ein. 
+2.1(optional) lege den namen für den optionalen zugriff per mDNS ein.
+<addr>
+12 const char *SSID = "******";
+13 const char *PSW = "****";
+14 //hier die nr. des Sensors eintragen um eine einfachere handhabung bei der ip eingabe zu haben
+15 const char *Nummnerierung_der_server = "Beet-vorm-fenster";
+</addr>
 2.1. flashe einen ESP8266 mit dieser Software und warte bis dieser sich mit deinem Router verbunden hat.
 
 2.2. nach dem du den Feuchte Sensor an den Pin A0 angelötet hast, musst du diesen Noch kallibrieren mit (im webbrowser auf einem gerät das im selben netzwerk ist): http.//IP_Des_ESP/kalibrierung?typ=0
