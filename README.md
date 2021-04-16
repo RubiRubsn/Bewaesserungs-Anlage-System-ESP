@@ -35,6 +35,9 @@
     <li><a href="#Beispiele">Beispiele</a></li>
     <li>
       <a href="#Installation">Installation</a>
+      <ul>
+            <li><a href="#Update">update</a></li>
+      </ul>
     </li>
     <li><a href="#Schaltungen">Schaltungen</a></li>
     <li><a href="#Danksagung">Danke an!</a></li>
@@ -57,7 +60,7 @@ Das System kann in 3 verschiedenen Modi betrieben werden.<br>
 3. Automatisiert mit Feuchtesensoren und Wetter vorhersage<br>
     Hier wird anhand von Feuchtesensoren die Feuchte im Beet gemessen und in Zusammenspiel mit der Wettervorhersage entschieden, ob bewässert werden soll.
 
-<br>!!ACHTUNG in Version 1.0 ist nur Modi 3 und 1 Nutzbar!! <br><br>
+<br>!!ACHTUNG in Version 1.- ist nur Modi 3 und 1 Nutzbar!! <br><br>
 
 Als Hauptserver dient ein ESP32 auf dem mit Hilfe der Bibliothek <a href="https://github.com/s00500/ESPUI">ESPUI von s00500</a> ein Webinterface gestaltet wurde.
 Dieser Server sammelt die Feuchtewerte und plant auch die Bewässerung. Da dieser Server nur die Bewässerung startet, stoppt die Bewässerung automatisch auch im Falle eines Absturz des Systems.<br>
@@ -146,6 +149,14 @@ Hier folgt in Kürze ein Video
 3.2. Trage die IP des Ventilservers im Hauptserver ein.<br>
 3.3. Nach der Einrichtung stelle bei deinem Router ein, dass die IP des ESP8266 immer gleich bleibt.
 
+Fertig!
+<br>
+### Update
+
+1. Lade die aktuelle Version herunter. <a href="https://github.com/RubiRubsn/Bewaesserungs-Anlage-System-ESP/releases">"HIER"</a><br>
+2. Öffne die Weboberfläche deines Bewässerungsservers und aktiviere die Einstellung "Aktiviere OTA Update" unter "Allgemeine Einstellungen"<br>
+3. Öffne im Browser "ESP_IP"/ota<br>
+4. Lade das firmware.bin File hoch und lade nach ca. 5 minuten die Webseite neu.<br>
 Fertig!
 
 ## Schaltungen

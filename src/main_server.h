@@ -20,7 +20,7 @@ struct wetter_dat
 struct einstellungen_id
 {
   int einst_tab_id;
-  int Allgemein[19];
+  int Allgemein[20];
 
   int beete_einst_tab_id;
   int Beete[7];
@@ -59,6 +59,7 @@ struct data_einstellungen
 class main_server
 {
 private:
+  static bool aktiviere_ota_update;
   static uint32_t timer_zwischenspeicher_sensoren;
   static uint32_t timer_zwischenspeicher_refresh;
   static uint8_t ausgew_beet;
@@ -94,6 +95,8 @@ private:
   static void set_ventil(int i, char zeit[]);
   static void stop_ventil(int ausgew_beet);
   void reset_var_check();
+  static void handleOTAUpload(AsyncWebServerRequest *request, String filename, size_t index, uint8_t *data, size_t len, bool final);
+  static void init_ota_update(setup_data1 update_data_1, setup_data2 update_data_2);
 
 public:
   static Data_Beete data_beete[20];

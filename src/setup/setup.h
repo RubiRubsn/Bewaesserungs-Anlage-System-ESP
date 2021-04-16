@@ -9,6 +9,7 @@ struct setup_data1
     uint8_t login = 0;
     uint8_t anzahl_beete = 1;
     bool end_setup = false;
+    char versions_nr[40];
 };
 
 struct setup_data2

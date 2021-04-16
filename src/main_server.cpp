@@ -12,12 +12,14 @@
 #include "setup/setup.h"
 #include "main_server.h"
 #include "save_load.h"
+#include <Update.h>
 
 int main_server::tabs[11] = {0};
 int main_server::wetter_id[4] = {0};
 einstellungen_id main_server::einst_id;
 
 bool main_server::reset = false;
+bool main_server::aktiviere_ota_update = false;
 int main_server::allgemein[20];
 setup_data1 main_server::update_data_1;
 setup_data2 main_server::update_data_2;
@@ -27,6 +29,67 @@ data_einstellungen main_server::data_einst;
 flaggs main_server::load_flaggs;
 uint8_t main_server::ausgew_beet = 99;
 uint8_t main_server::manuelle_bew_zeit[20];
+
+const char *OTA_INDEX PROGMEM = R"=====(<!DOCTYPE html><html><head><meta charset=utf-8><title>OTA</title></head><body><div class="upload"><form method="POST" action="/ota" enctype="multipart/form-data"><input type="file" name="data" /><input type="submit" name="upload" value="Upload" title="Upload Files"></form></div></body></html>)=====";
+
+void main_server::handleOTAUpload(AsyncWebServerRequest *request, String filename, size_t index, uint8_t *data, size_t len, bool final)
+{
+    if (!index)
+    {
+        Serial.printf("UploadStart: %s\n", filename.c_str());
+        if (!Update.begin(UPDATE_SIZE_UNKNOWN))
+        {
+            Update.printError(Serial);
+        }
+    }
+
+    if (len)
+    {
+        Update.write(data, len);
+    }
+    if (final)
+    {
+        if (Update.end(true))
+        {
+            Serial.printf("Update Success: %ub written\nRebooting...\n", index + len);
+            ESPUI.jsonReload();
+            delay(100);
+            ESP.restart();
+        }
+        else
+        {
+            Update.printError(Serial);
+        }
+    }
+};
+
+void main_server::init_ota_update(setup_data1 update_data_1, setup_data2 update_data_2)
+{
+    ESPUI.server->on(
+        "/ota", HTTP_POST, [&](AsyncWebServerRequest *request) {
+            if (!aktiviere_ota_update)
+            {
+                return request->redirect("/");
+            }
+            else
+            {
+                request->send(200);
+            }
+        },
+        handleOTAUpload);
+
+    ESPUI.server->on("/ota", HTTP_GET, [&](AsyncWebServerRequest *request) {
+        if (!aktiviere_ota_update)
+        {
+            return request->redirect("/");
+        }
+        else
+        {
+            AsyncWebServerResponse *response = request->beginResponse_P(200, "text/html", OTA_INDEX);
+            request->send(response);
+        }
+    });
+};
 
 void main_server::update_data_ex(setup_data1 &setup_data_1, setup_data2 &setup_data_2)
 {
@@ -169,6 +232,19 @@ void main_server::sliderCallback(Control *sender, int type)
 
 void main_server::switchCallback(Control *sender, int value)
 {
+    if (sender->id == einst_id.Allgemein[19])
+    {
+        switch (value)
+        {
+        case S_ACTIVE:
+            aktiviere_ota_update = true;
+            break;
+
+        case S_INACTIVE:
+            aktiviere_ota_update = false;
+            break;
+        }
+    }
     if (sender->id == einst_id.Allgemein[3])
     {
         switch (value)
@@ -942,6 +1018,8 @@ void main_server::init_server(setup_data1 &setup_data_1, setup_data2 &setup_data
     ESPUI.addControl(ControlType::Option, "stark", "2", data_einst.farbe, einst_id.Allgemein[14]);
     einst_id.Allgemein[15] = ESPUI.addControl(ControlType::Text, "zum zurücksetzten hier bitte ZURÜCKSETZEN eingeben und dann bestätigen", "willst du das wirklich?", data_einst.farbe, einst_id.Allgemein[0], &textCallback);
     einst_id.Allgemein[9] = ESPUI.addControl(ControlType::Button, "Server zurücksetzen", "Drücken", data_einst.farbe, einst_id.Allgemein[0], &buttonCallback);
+    ESPUI.addControl(ControlType::Label, "Software Version:", String(update_data_1.versions_nr), data_einst.farbe, einst_id.Allgemein[0], &textCallback);
+    einst_id.Allgemein[19] = ESPUI.addControl(ControlType::Switcher, "Aktiviere OTA Update", String("0"), data_einst.farbe, einst_id.Allgemein[0], &switchCallback);
     einst_id.beete_einst_tab_id = ESPUI.addControl(ControlType::Tab, "Beete Einstellungen", "Beete Einstellungen");
     einst_id.Beete[0] = ESPUI.addControl(ControlType::Select, "Beet Auswählen", "99", data_einst.farbe, einst_id.beete_einst_tab_id, &selectCallback);
     ESPUI.addControl(ControlType::Option, "bitte wähle ein Beet aus", "99", data_einst.farbe, einst_id.Beete[0]);
@@ -994,6 +1072,7 @@ void main_server::init_server(setup_data1 &setup_data_1, setup_data2 &setup_data
     ESPUI.print(tabs[10], "0");
     ausgew_beet = 0;
     load_flaggs.update_UI = true;
+    init_ota_update(update_data_1, update_data_2);
 }
 
 bool main_server::flaggs_abfragen(setup_data1 &setup_data_1, setup_data2 &setup_data_2)

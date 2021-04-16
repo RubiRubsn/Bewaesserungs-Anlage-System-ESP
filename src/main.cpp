@@ -11,9 +11,12 @@
 #include "setup/setup.h"
 #include "main_server.h"
 #include "save_load.h"
+#include <string.h>
 
 server_setup server_setup;
 main_server main_server;
+
+char versions_nr[40] = "Release 1.1";
 
 IPAddress apIP(192, 168, 178, 1);
 const byte DNS_PORT = 80;
@@ -21,6 +24,7 @@ DNSServer dnsServer;
 
 void setup()
 {
+  strcpy(server_setup.setup_data_1.versions_nr, versions_nr);
   delay(1000);
   save_load save_load;
   Serial.begin(115200);
