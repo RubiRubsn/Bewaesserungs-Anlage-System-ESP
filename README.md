@@ -29,7 +29,7 @@
       <a href="#Über-das-Projekt">Über das Projekt</a>
         <ul>
             <li><a href="#Details-zur-Oberfläche">Details zur Oberfläche</a></li>
-            <li><a href="#Was-brauche-ich">Was brauche ich?</a></li>
+            <li><a href="#Was-brauche-ich?">Was brauche ich?</a></li>
       </ul>
     </li>
     <li><a href="#Beispiele">Beispiele</a></li>
@@ -63,7 +63,7 @@ Dieser Server sammelt die Feuchtewerte und plant auch die Bewässerung. Da diese
 Dieser Server kann mit Freigaben auch öffentlich erreicht werden. Ich habe dies mit Hilfe von <a href="https://myfritz.net/">MY!FRITZ</a> realisiert. (setzt die Nutzung einer Fritz!box voraus). <br>
 Es gibt 2 weitere Typen von Servern, ein Feuchteserver und ein Ventilserver. Beide Server werden mit ESP8266 realisiert.<br>
 Der Feuchteserver sendet auf Anfrage des Hauptservers die Feuchte an den Server. Dieser Feuchteserver kann direkt am Beet angebracht werden.
-Der Ventilserver kann in 3 verschiedenen Modis betrieben werden. <br>
+Der Ventilserver kann in 3 verschiedenen Modi betrieben werden. <br>
 
 1. Nutzung von bis zu vier Ventilen pro Server am Trinkwasseranschluss
 
@@ -73,52 +73,45 @@ Der Ventilserver kann in 3 verschiedenen Modis betrieben werden. <br>
 
 
 ### Details zur Oberfläche
-Die Oberfläche unterstützt bis zu 20 Beete. das Aktuelle Wetter und auch die aktuelle feuchte werden im  Allgemein Tab angezeigt.
+Die Oberfläche unterstützt bis zu 20 Beete. Das aktuelle Wetter und auch die aktuelle Feuchte werden im "Allgemein" Tab angezeigt.
 
 [![Allgemein Screenshot][product-screenshot]]()
 
-Im Tab Beete ist eine detalierte Betrachtung jedes Beets möglich. vom ventil zustand, bis hin zur Manuellen Bewässerung oder auch ob eine Automatisierte Bewässerung geplant ist erfährst du hier alles.
+Im Tab "Beete" ist eine detallierte Betrachtung jedes Beets möglich. Vom Ventilzustand, bis hin zur manuellen Bewässerung oder auch ob eine automatisierte Bewässerung geplant ist, erfährst du alles hier.<br>
 
 [![Beete Screenshot][beet-screenshot]]()
 
-Im Tab Allgemeine Einstellungen kannst du alles einstellen, ob deine Oberfläche Passwort geschützt sein soll, bis hin zu den Automatischen Bewässerungs Kriterien.
+Im Tab "Allgemeine Einstellungen" findest du Einstellungen, wie: <br> - ob deine Oberfläche passwortgeschützt sein soll <br> - Einstellung der automatischen Bewässerungskriterien.<br>
 
 [![einst Screenshot][einst-screenshot]]()
 
-Im Tab Beet Einstellungen kannst du alles zu den Beeten einstellen. wie, den Namen oder auch die Adressen der Feuchte bzw Ventil Sensoren.
+Im Tab "Beete Einstellungen" kannst du alles zu den Beeten einstellen. wie: <br> -  den Namen der Beete <br> - die Adressen der Feuchte- bzw Ventilsensoren <br> - die Standartbewässerungszeit der Beete<br>
 
 [![beet einst Screenshot][beeteinst-screenshot]]()
 
 
-### Was brauche ich
+### Was brauche ich?
 
-für die Nutzung der Oberfläche ist ein Kostenloser zugang zur <a href="https://openweathermap.org/api">Openweathermap API</a> notwendig.
-nach der Anmeldung erhälst du einen API schlüssel den du im einrichtungs Prozess in der Oberfläche eintragen kannst.
+Für die Nutzung der Oberfläche ist ein kostenloser Zugang zur <a href="https://openweathermap.org/api">Openweathermap API</a> notwendig.
+Nach der Anmeldung erhälst du einen API-Schlüssel den du im Einrichtungsprozess in der Weboberfläche eintragen kannst.<br>
+Als Ventile für das Wasser nutze ich: <a href="https://www.amazon.de/gp/product/B06XCSVZPT/ref=ppx_yo_dt_b_asin_image_o02_s01?ie=UTF8&psc=1">UEETEK 1/2 Zoll 12V Elektro Magnetventile</a>.<br>
+Als Relais für die Ventile nutze ich <a href="https://www.amazon.de/gp/product/B07TZ778VH/ref=ppx_yo_dt_b_asin_title_o02_s00?ie=UTF8&psc=1">eine standart 4er Relai Platine</a>.<br>
+Als Feuchtesensoren nutze ich <a href="https://www.az-delivery.de/products/bodenfeuchte-sensor-modul-v1-2?_pos=6&_sid=22262207f&_ss=r">capacitiv soil moisture Sensor v1.2</a>, deren Ende (also der belötete Teil der Platine) ich mit Hilfe eines Plastikshotglases in Epoxidharz eingegossen habe. <br>
+Dieser Sensor wird auch für die Füllstandmessung im Regenfass benutzt (Optional).<br>
+Als Hauptserver habe ich den <a href="https://www.az-delivery.de/products/esp32-dev-kit-c-unverlotet?_pos=5&_sid=72925e31b&_ss=r">ESP32 Dev Kit c</a> verwendet.<br>
+Als Server für die Feuchtigkeit habe ich <a href="https://www.az-delivery.de/products/nodemcu-lua-lolin-v3-modul-mit-esp8266-12e-unverlotet?_pos=28&_sid=f7dcaf8b6&_ss=r">ESP8266</a> verwendet.<br>
+Dazu nutze ich passende 5v Netzteile für die ESP´s und 12V Netzteile für die Ventile.<br>
+Als Bewässerungsschlauch habe ich den Perlschlauch von  <a href="https://cs-wss.com/">CS systeme</a> verwendet.<br>
 
-als Ventile für das wasser nutzte ich: <a href="https://www.amazon.de/gp/product/B06XCSVZPT/ref=ppx_yo_dt_b_asin_image_o02_s01?ie=UTF8&psc=1">UEETEK 1/2 Zoll 12V Elektro Magnetventil</a>   
-
-als Relays für die Ventile benutze ich <a href="https://www.amazon.de/gp/product/B07TZ778VH/ref=ppx_yo_dt_b_asin_title_o02_s00?ie=UTF8&psc=1">eine Standart 4er Relay Platine</a>.
-
-als feuchte sensoren nutzte ich <a href="https://www.az-delivery.de/products/bodenfeuchte-sensor-modul-v1-2?_pos=6&_sid=22262207f&_ss=r">capacitiv soil moisture Sensor v1.2</a>.
-deren ende (also da wo bauteile aufgelötet sind, die nicht nass werden dürfen) ich mit hilfe eine Plastik shotglases in Epoxidharz eingegossen habe.
-dieser sensor wird auch für die Nutzung der Füllstandmessung im Regenfass benutzt (Optional)
-
-Als haupt server habe ich den <a href="https://www.az-delivery.de/products/esp32-dev-kit-c-unverlotet?_pos=5&_sid=72925e31b&_ss=r">ESP32 Dev Kit c</a> verwendet.
-
-als Server für die Feuchtigkeit habe ich <a href="https://www.az-delivery.de/products/nodemcu-lua-lolin-v3-modul-mit-esp8266-12e-unverlotet?_pos=28&_sid=f7dcaf8b6&_ss=r">ESP8266</a> verwendet.
-
-dazu natürlich passende 5v netzteile für die ESP´s und 12V netzteile für die Ventile.
-
-Als Bewässerungsschlauch habe ich den Perlschlauch von  <a href="https://cs-wss.com/">CS systeme</a> verwendet.
-
-Dazu noch passend Rohre um zu den Beeten zu kommen.
+Dazu noch passend Rohre um zu den Beeten zu kommen.<br>
 
 ## Beispiele
-
-Hier folgt in kürze ein Video
+<br>
+Hier folgt in Kürze ein Video
+<br>
 
 ## Installation
-1.a. lade dir das Releas firmware.bin File herunter und nutze  <a href="https://github.com/Grovkillen/ESP_Easy_Flasher">ESP_Easy_Flasher</a> um den File auf den Haupt Server zu Flashen.
+1.a. Lade dir das Releas firmware.bin File herunter und nutze  <a href="https://github.com/Grovkillen/ESP_Easy_Flasher">ESP_Easy_Flasher</a> um den File auf den Haupt Server zu Flashen.
 
 1.b. oder clone dieses Repository und flashe den File mit VSCode und Platform IO
 
