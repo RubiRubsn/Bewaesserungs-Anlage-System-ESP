@@ -147,7 +147,12 @@ Hier folgt in Kürze ein Video
 
 Fertig!
 
-Schaltdiagramme folgen noch
+Schaltdiagramme Ventilserver:<br>
+[![ventil-schaltplan][ventil-schaltplan]]()
+<br>
+[![feuchte-schaltplan][feuchte-schaltplan]]()
+<br>
+
 
 ## Danksagung
 
@@ -160,3 +165,5 @@ Schaltdiagramme folgen noch
 [beet-screenshot]: images/beete.png
 [einst-screenshot]: images/einstellungenAllg.png
 [beeteinst-screenshot]: images/beet-einst.png
+[ventil-schaltplan]: images/schaltplan_ventil.png
+[feuchte-schaltplan]: images/schaltplan_feuchte.png
