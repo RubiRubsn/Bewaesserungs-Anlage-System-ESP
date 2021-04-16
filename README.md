@@ -36,6 +36,7 @@
     <li>
       <a href="#Installation">Installation</a>
     </li>
+    <li><a href="#Schaltungen">Schaltungen</a></li>
     <li><a href="#Danksagung">Danke an!</a></li>
   </ol>
 </details>
@@ -146,6 +147,8 @@ Hier folgt in Kürze ein Video
 3.3. Nach der Einrichtung stelle bei deinem Router ein, dass die IP des ESP8266 immer gleich bleibt.
 
 Fertig!
+
+## Schaltungen
 
 Schaltdiagramm Ventilserver:<br>
 [![ventil-schaltplan][ventil-schaltplan]]()
