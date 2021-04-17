@@ -7,6 +7,7 @@
 #endif
 #include <string.h>
 #include "setup.h"
+#include "../language.h"
 
 int server_setup::ID_init_1[7] = {0, 0, 0, 0, 0, 0, 0};
 
@@ -180,6 +181,7 @@ void server_setup::buttonCallback_set_1(Control *sender, int type)
 void server_setup::init_1()
 {
     //init data
+    lang_setup_1 language;
     setup_data_1.anzahl_beete = 1;
     setup_data_1.bew_typ = 3;
     setup_data_1.login = 0;
@@ -188,12 +190,12 @@ void server_setup::init_1()
     strcpy(setup_data_1.hostname, "bewaesserungssystem");
     ESPUI.setVerbosity(Verbosity::VerboseJSON);
 
-    uint16_t tab1 = ESPUI.addControl(ControlType::Tab, "Setup schritt 1", "Setup schritt 1");
-    ESPUI.addControl(ControlType::Label, "Wilkommen:", "Bitte füllen sie die Nachfolgenden felder aus: nach dem bestätigen Startet der Server neu und ist dann unter der IP: 192.168.178.1 zu erreichen. ist dies nicht der fall schauen sie die IP in den einstellungen ihres Routers nach.", ControlColor::Turquoise, tab1);
-    ID_init_1[0] = ESPUI.addControl(ControlType::Text, "SSID:", "Martin Router King", ControlColor::Alizarin, tab1, &textCall_set_1);
-    ID_init_1[1] = ESPUI.addControl(ControlType::Text, "Passwort:", "ABC123BlaBla", ControlColor::Alizarin, tab1, &textCall_set_1);
-    ID_init_1[2] = ESPUI.addControl(ControlType::Text, "Name des systems:", "Bewässerungsanlage", ControlColor::Alizarin, tab1, &textCall_set_1);
-    ID_init_1[3] = ESPUI.addControl(ControlType::Select, "Anzahl der beete", "", ControlColor::Alizarin, tab1, &select_set_1);
+    uint16_t tab1 = ESPUI.addControl(ControlType::Tab, language.name_tab, String(language.name_tab));
+    ESPUI.addControl(ControlType::Label, language.welcome, String(language.welcome_description), ControlColor::Turquoise, tab1);
+    ID_init_1[0] = ESPUI.addControl(ControlType::Text, language.SSID, "Martin Router King", ControlColor::Alizarin, tab1, &textCall_set_1);
+    ID_init_1[1] = ESPUI.addControl(ControlType::Text, language.psw, "ABC123BlaBla", ControlColor::Alizarin, tab1, &textCall_set_1);
+    ID_init_1[2] = ESPUI.addControl(ControlType::Text, language.name_system, "Bewässerungsanlage", ControlColor::Alizarin, tab1, &textCall_set_1);
+    ID_init_1[3] = ESPUI.addControl(ControlType::Select, language.number_of_bed, "", ControlColor::Alizarin, tab1, &select_set_1);
     ESPUI.addControl(ControlType::Option, "1", "1", ControlColor::Alizarin, ID_init_1[3]);
     ESPUI.addControl(ControlType::Option, "2", "2", ControlColor::Alizarin, ID_init_1[3]);
     ESPUI.addControl(ControlType::Option, "3", "3", ControlColor::Alizarin, ID_init_1[3]);
@@ -214,13 +216,13 @@ void server_setup::init_1()
     ESPUI.addControl(ControlType::Option, "18", "18", ControlColor::Alizarin, ID_init_1[3]);
     ESPUI.addControl(ControlType::Option, "19", "19", ControlColor::Alizarin, ID_init_1[3]);
     ESPUI.addControl(ControlType::Option, "20", "20", ControlColor::Alizarin, ID_init_1[3]);
-    ID_init_1[4] = ESPUI.addControl(ControlType::Switcher, "Benutzeroberfläche mit Login Schützen", "", ControlColor::Alizarin, tab1, &switch_set_1);
-    ID_init_1[5] = ESPUI.addControl(ControlType::Select, "Bewässerungs Typ:", "Opt3", ControlColor::Alizarin, tab1, &select_set_1);
-    ESPUI.addControl(ControlType::Option, "Manuell", "Opt1", ControlColor::Alizarin, ID_init_1[5]);
-    ESPUI.addControl(ControlType::Option, "nach Bodenfeuchte", "Opt2", ControlColor::Alizarin, ID_init_1[5]);
-    ESPUI.addControl(ControlType::Option, "nach Bodenfeuchte + Wetter", "Opt3", ControlColor::Alizarin, ID_init_1[5]);
-    ID_init_1[6] = ESPUI.addControl(ControlType::Button, "Angaben Bestätigen:", "Drücken", ControlColor::Wetasphalt, tab1, &buttonCallback_set_1);
-    ESPUI.begin("Einrichtung der Bewässerungsanlage");
+    ID_init_1[4] = ESPUI.addControl(ControlType::Switcher, language.secure_ui_with_login, "", ControlColor::Alizarin, tab1, &switch_set_1);
+    ID_init_1[5] = ESPUI.addControl(ControlType::Select, language.irrigation_type, "Opt3", ControlColor::Alizarin, tab1, &select_set_1);
+    ESPUI.addControl(ControlType::Option, language.irrigation_manuel, "Opt1", ControlColor::Alizarin, ID_init_1[5]);
+    ESPUI.addControl(ControlType::Option, language.irrigation_moist, "Opt2", ControlColor::Alizarin, ID_init_1[5]);
+    ESPUI.addControl(ControlType::Option, language.irrigation_moist_weather, "Opt3", ControlColor::Alizarin, ID_init_1[5]);
+    ID_init_1[6] = ESPUI.addControl(ControlType::Button, language.confirm_changes, "Drücken", ControlColor::Wetasphalt, tab1, &buttonCallback_set_1);
+    ESPUI.begin(language.hostname);
 };
 
 setup_data1 server_setup::handle_setup_1()

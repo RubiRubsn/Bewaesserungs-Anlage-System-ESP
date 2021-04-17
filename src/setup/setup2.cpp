@@ -7,6 +7,7 @@
 #endif
 #include <string.h>
 #include "setup.h"
+#include "../language.h"
 
 #define debugmode 1
 
@@ -303,6 +304,7 @@ void server_setup::buttonCallback_set_2(Control *sender, int type)
 
 void server_setup::init_2(const char *ssid, const char *password, const char *hostname, const uint8_t anz_bee, const uint8_t bew_typ, const uint8_t login)
 {
+    lang_setup_2 language;
     setup_data_1.anzahl_beete = anz_bee;
     strcpy(setup_data_2.login[0], "Eren Jaeger");
     strcpy(setup_data_2.login[1], "o mai ma mou shindeiru");
@@ -322,30 +324,30 @@ void server_setup::init_2(const char *ssid, const char *password, const char *ho
 
     ESPUI.setVerbosity(Verbosity::VerboseJSON);
 
-    uint16_t Allgemein = ESPUI.addControl(ControlType::Tab, "Allgemein", "Allgemein");
+    uint16_t Allgemein = ESPUI.addControl(ControlType::Tab, language.name_tab_generally, String(language.name_tab_generally));
 
-    uint16_t Beete = ESPUI.addControl(ControlType::Tab, "Beete", "Beete");
+    uint16_t Beete = ESPUI.addControl(ControlType::Tab, language.name_tab_bed, String(language.name_tab_bed));
 
     if (login == 1)
     {
-        ESPUI.addControl(ControlType::Label, "Login des Webinterface:", "Bitte gib sie Nachfolgend deine gewünschten Logindaten ein", ControlColor::Turquoise, Allgemein);
-        id_init_2.login[0] = ESPUI.addControl(ControlType::Text, "Login Benutzername:", String(setup_data_2.login[0]), ControlColor::Alizarin, Allgemein, &textCall_set_2);
-        id_init_2.login[1] = ESPUI.addControl(ControlType::Text, "Login passwort:", String(setup_data_2.login[1]), ControlColor::Alizarin, Allgemein, &textCall_set_2);
+        ESPUI.addControl(ControlType::Label, language.login_header, String(language.login_description), ControlColor::Turquoise, Allgemein);
+        id_init_2.login[0] = ESPUI.addControl(ControlType::Text, language.login_usr, String(setup_data_2.login[0]), ControlColor::Alizarin, Allgemein, &textCall_set_2);
+        id_init_2.login[1] = ESPUI.addControl(ControlType::Text, language.login_psw, String(setup_data_2.login[1]), ControlColor::Alizarin, Allgemein, &textCall_set_2);
     };
     if (bew_typ == 3)
     {
-        ESPUI.addControl(ControlType::Label, "Wetterdaten:", "Bitte gib Nachfolgend den Zugangscode deiner openweathermap.org API, wenn du diesen nicht haben solltest erstelle dir Kostenfrei einen Account, ein und darauffolgend den Breiten und Längengrad deines Gartens", ControlColor::Turquoise, Allgemein);
-        id_init_2.wetter[0] = ESPUI.addControl(ControlType::Text, "Wetter API Code", "011235813", ControlColor::Alizarin, Allgemein, &textCall_set_2);
-        id_init_2.wetter[1] = ESPUI.addControl(ControlType::Text, "Breitengrad", "52.516275", ControlColor::Alizarin, Allgemein, &textCall_set_2);
-        id_init_2.wetter[2] = ESPUI.addControl(ControlType::Text, "Längengrad", "13.377704", ControlColor::Alizarin, Allgemein, &textCall_set_2);
+        ESPUI.addControl(ControlType::Label, language.weather_data, String(language.weather_data_description), ControlColor::Turquoise, Allgemein);
+        id_init_2.wetter[0] = ESPUI.addControl(ControlType::Text, language.weather_api, "011235813", ControlColor::Alizarin, Allgemein, &textCall_set_2);
+        id_init_2.wetter[1] = ESPUI.addControl(ControlType::Text, language.weather_latitude, "52.516275", ControlColor::Alizarin, Allgemein, &textCall_set_2);
+        id_init_2.wetter[2] = ESPUI.addControl(ControlType::Text, language.weather_longitude, "13.377704", ControlColor::Alizarin, Allgemein, &textCall_set_2);
     }
     if (login != 1 && bew_typ != 3)
     {
-        ESPUI.addControl(ControlType::Label, "Hier gibt es für dich nichts zu sehen!", "bitte gehen sie direkt zu den einstellungen ihres beetes weiter, nutze die tabs oben ^^", ControlColor::Turquoise, Allgemein);
+        ESPUI.addControl(ControlType::Label, language.nothing_for_you, String(language.nothing_for_you_description), ControlColor::Turquoise, Allgemein);
     }
     else
     {
-        ESPUI.addControl(ControlType::Label, "Weiter gehts", "jetzt geht es mit den einstellungen der beete weiter, nutze die tabs oben ^^", ControlColor::Turquoise, Allgemein);
+        ESPUI.addControl(ControlType::Label, language.go_on, language.go_on_description, ControlColor::Turquoise, Allgemein);
     }
 #if debugmode == 1
     dev_button_id = ESPUI.addControl(ControlType::Button, "Setup zurück setzen:", "Drücken", ControlColor::Wetasphalt, Allgemein, &buttonCallback_set_2);
@@ -381,7 +383,7 @@ void server_setup::init_2(const char *ssid, const char *password, const char *ho
         ESPUI.addControl(ControlType::Option, "120 min", "120", ControlColor::Alizarin, id_init_2.id_beet.id_stand_bew_zeit);
     }
 
-        id_init_2.absenden = ESPUI.addControl(ControlType::Button, "Angaben Bestätigen:", "Drücken", ControlColor::Wetasphalt, Beete, &buttonCallback_set_2);
+    id_init_2.absenden = ESPUI.addControl(ControlType::Button, "Angaben Bestätigen:", "Drücken", ControlColor::Wetasphalt, Beete, &buttonCallback_set_2);
     ESPUI.begin(setup_data_1.hostname);
 };
 
