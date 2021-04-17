@@ -113,7 +113,8 @@ Dazu noch passende Rohre um zu den Beeten zu kommen.<br>
 Hier folgt in Kürze ein Video
 <br>
 
-## Installation <br>
+## Installation 
+<br>
 1.a. Lade dir aus dem <a href="https://github.com/RubiRubsn/Bewaesserungs-Anlage-System-ESP/releases">"Releas"</a> das File "firmware.bin" herunter und nutze  <a href="https://github.com/Grovkillen/ESP_Easy_Flasher">ESP_Easy_Flasher</a> um das File auf den Hauptserver zu flashen.<br>
 1.b. oder klone dieses Repository und flashe das File mit VSCode und Platform IO <br>
 1.1. Zum Einrichten gehe in das offene Netzwerk des ESP32. <br>
