@@ -13,6 +13,7 @@
 #include "main_server.h"
 #include "save_load.h"
 #include <Update.h>
+#include "language.h"
 
 int main_server::tabs[11] = {0};
 int main_server::wetter_id[4] = {0};
@@ -904,6 +905,7 @@ void main_server::buttonCallback(Control *sender, int type)
 
 void main_server::init_server(setup_data1 &setup_data_1, setup_data2 &setup_data_2)
 {
+    lang_main_server language;
     update_data_1 = setup_data_1;
     update_data_2 = setup_data_2;
     for (int i = 0; i < 20; i++)
@@ -916,43 +918,43 @@ void main_server::init_server(setup_data1 &setup_data_1, setup_data2 &setup_data
     Serial.println(setup_data_2.login[0]);
     Serial.println(update_data_2.login[1]);
     ESPUI.setVerbosity(Verbosity::VerboseJSON);
-    wetter_id[0] = ESPUI.addControl(ControlType::Tab, "Allgemein", "Allgemein");
+    wetter_id[0] = ESPUI.addControl(ControlType::Tab, language.name_tab_general, String(language.name_tab_general));
     if (setup_data_1.bew_typ == 3)
     {
-        wetter_id[1] = ESPUI.addControl(ControlType::Label, "aktuelles Wetter:", "nicht erreichbar", data_einst.farbe, wetter_id[0]);
-        wetter_id[2] = ESPUI.addControl(ControlType::Label, "Wetter morgen:", "nicht erreichbar", data_einst.farbe, wetter_id[0]);
+        wetter_id[1] = ESPUI.addControl(ControlType::Label, language.current_weather, String(language.currently_not_available), data_einst.farbe, wetter_id[0]);
+        wetter_id[2] = ESPUI.addControl(ControlType::Label, language.weather_tomorrow, String(language.currently_not_available), data_einst.farbe, wetter_id[0]);
     }
     for (int i = 0; i < update_data_1.anzahl_beete; i++)
     {
-        char *titel = new char[strlen("Feuchte im Beet ") + strlen(update_data_2.beet_name[i])];
-        strcpy(titel, "Feuchte im ");
+        char *titel = new char[strlen(language.moisture_in_bed) + strlen(update_data_2.beet_name[i]) + strlen(":")];
+        strcpy(titel, language.moisture_in_bed);
         strcat(titel, update_data_2.beet_name[i]);
         strcat(titel, ":");
-        allgemein[i] = ESPUI.addControl(ControlType::Label, titel, "nicht erreichbar", data_einst.farbe, wetter_id[0]);
+        allgemein[i] = ESPUI.addControl(ControlType::Label, titel, String(language.currently_not_available), data_einst.farbe, wetter_id[0]);
     }
     if (setup_data_1.bew_typ == 3)
     {
-        wetter_id[3] = ESPUI.addControl(ControlType::Button, "neu laden", "DRÜCKEN", data_einst.farbe, wetter_id[0], &buttonCallback);
+        wetter_id[3] = ESPUI.addControl(ControlType::Button, language.reload, String(language.press), data_einst.farbe, wetter_id[0], &buttonCallback);
     }
-    tabs[0] = ESPUI.addControl(ControlType::Tab, "Beete", "Beete");
-    tabs[10] = ESPUI.addControl(ControlType::Select, "Beet auswählen", "99", data_einst.farbe, tabs[0], &selectCallback);
-    ESPUI.addControl(ControlType::Option, "bitte ein Beet auswählen", "99", data_einst.farbe, tabs[10]);
+    tabs[0] = ESPUI.addControl(ControlType::Tab, language.name_tab_bed, String(language.name_tab_bed));
+    tabs[10] = ESPUI.addControl(ControlType::Select, language.choose_bed, "99", data_einst.farbe, tabs[0], &selectCallback);
+    ESPUI.addControl(ControlType::Option, language.please_choose_bed, "99", data_einst.farbe, tabs[10]);
     for (int i = 0; i < setup_data_1.anzahl_beete; i++)
     {
         const char *name = setup_data_2.beet_name[i];
         ESPUI.addControl(ControlType::Option, name, String(i), data_einst.farbe, tabs[10]);
     }
 
-    tabs[1] = ESPUI.addControl(ControlType::Label, "Ventil zustand", "nicht erreichbar", data_einst.farbe, tabs[0]);
+    tabs[1] = ESPUI.addControl(ControlType::Label, language.valve_condition, String(language.currently_not_available), data_einst.farbe, tabs[0]);
     if (setup_data_1.bew_typ != 1)
     {
-        tabs[2] = ESPUI.addControl(ControlType::Label, "aktuelle Feuchte", "nicht erreichbar", data_einst.farbe, tabs[0]);
-        tabs[3] = ESPUI.addControl(ControlType::Label, "durchschnittliche Feuchte der letzten 24 H", "nicht erreichbar", data_einst.farbe, tabs[0]);
-        tabs[4] = ESPUI.addControl(ControlType::Label, "geplante Bewässerung", "nicht geplant", data_einst.farbe, tabs[0]);
-        tabs[5] = ESPUI.addControl(ControlType::Switcher, "geplante Bewässerung durchführen", "", data_einst.farbe, tabs[0], &switchCallback);
+        tabs[2] = ESPUI.addControl(ControlType::Label, language.current_moisture, String(language.currently_not_available), data_einst.farbe, tabs[0]);
+        tabs[3] = ESPUI.addControl(ControlType::Label, language.average_moisture, String(language.currently_not_available), data_einst.farbe, tabs[0]);
+        tabs[4] = ESPUI.addControl(ControlType::Label, language.planed_irrigation, String(language.not_planed), data_einst.farbe, tabs[0]);
+        tabs[5] = ESPUI.addControl(ControlType::Switcher, language.do_planed_irrigation, "", data_einst.farbe, tabs[0], &switchCallback);
     };
 
-    tabs[6] = ESPUI.addControl(ControlType::Select, "Bewässerungszeit für eine manuelle Bewässerung", "", data_einst.farbe, tabs[0], &selectCallback);
+    tabs[6] = ESPUI.addControl(ControlType::Select, language.time_for_manual_irrigation, "", data_einst.farbe, tabs[0], &selectCallback);
     ESPUI.addControl(ControlType::Option, "15 min", "15", data_einst.farbe, tabs[6]);
     ESPUI.addControl(ControlType::Option, "30 min", "30", data_einst.farbe, tabs[6]);
     ESPUI.addControl(ControlType::Option, "45 min", "45", data_einst.farbe, tabs[6]);
@@ -961,16 +963,16 @@ void main_server::init_server(setup_data1 &setup_data_1, setup_data2 &setup_data
     ESPUI.addControl(ControlType::Option, "90 min", "90", data_einst.farbe, tabs[6]);
     ESPUI.addControl(ControlType::Option, "105 min", "105", data_einst.farbe, tabs[6]);
     ESPUI.addControl(ControlType::Option, "120 min", "120", data_einst.farbe, tabs[6]);
-    tabs[7] = ESPUI.addControl(ControlType::Button, "manuelle Bewässerung starten", "DRÜCKEN", data_einst.farbe, tabs[0], &buttonCallback);
-    tabs[8] = ESPUI.addControl(ControlType::Button, "Bewässerung stoppen", "DRÜCKEN", data_einst.farbe, tabs[0], &buttonCallback);
-    tabs[9] = ESPUI.addControl(ControlType::Button, "neu laden", "DRÜCKEN", data_einst.farbe, tabs[0], &buttonCallback);
+    tabs[7] = ESPUI.addControl(ControlType::Button, language.start_manual_irrigation, String(language.press), data_einst.farbe, tabs[0], &buttonCallback);
+    tabs[8] = ESPUI.addControl(ControlType::Button, language.stop_irrigation, String(language.press), data_einst.farbe, tabs[0], &buttonCallback);
+    tabs[9] = ESPUI.addControl(ControlType::Button, language.reload, String(language.press), data_einst.farbe, tabs[0], &buttonCallback);
 
-    einst_id.Allgemein[0] = ESPUI.addControl(ControlType::Tab, "Allgemeine Einstellungen", "Allgemeine Einstellungen", data_einst.farbe, einst_id.einst_tab_id);
-    einst_id.Allgemein[1] = ESPUI.addControl(ControlType::Select, "Bewässerungstyp:", String(update_data_1.bew_typ), data_einst.farbe, einst_id.Allgemein[0], &selectCallback);
-    ESPUI.addControl(ControlType::Option, "Manuell", "1", data_einst.farbe, einst_id.Allgemein[1]);
-    ESPUI.addControl(ControlType::Option, "nach Bodenfeuchte", "2", data_einst.farbe, einst_id.Allgemein[1]);
-    ESPUI.addControl(ControlType::Option, "nach Bodenfeuchte + Wetter", "3", data_einst.farbe, einst_id.Allgemein[1]);
-    einst_id.Allgemein[2] = ESPUI.addControl(ControlType::Select, "anzahl der Beete", String(update_data_1.anzahl_beete - 1), data_einst.farbe, einst_id.Allgemein[0], &selectCallback);
+    einst_id.Allgemein[0] = ESPUI.addControl(ControlType::Tab, language.name_tab_general_settings, String(language.name_tab_general_settings), data_einst.farbe, einst_id.einst_tab_id);
+    einst_id.Allgemein[1] = ESPUI.addControl(ControlType::Select, language.irrigation_type, String(update_data_1.bew_typ), data_einst.farbe, einst_id.Allgemein[0], &selectCallback);
+    ESPUI.addControl(ControlType::Option, language.irrigation_manuel, "1", data_einst.farbe, einst_id.Allgemein[1]);
+    ESPUI.addControl(ControlType::Option, language.irrigation_moist, "2", data_einst.farbe, einst_id.Allgemein[1]);
+    ESPUI.addControl(ControlType::Option, language.irrigation_moist_weather, "3", data_einst.farbe, einst_id.Allgemein[1]);
+    einst_id.Allgemein[2] = ESPUI.addControl(ControlType::Select, language.number_of_bed, String(update_data_1.anzahl_beete - 1), data_einst.farbe, einst_id.Allgemein[0], &selectCallback);
     ESPUI.addControl(ControlType::Option, "1", "0", data_einst.farbe, einst_id.Allgemein[2]);
     ESPUI.addControl(ControlType::Option, "2", "1", data_einst.farbe, einst_id.Allgemein[2]);
     ESPUI.addControl(ControlType::Option, "3", "2", data_einst.farbe, einst_id.Allgemein[2]);
@@ -991,16 +993,16 @@ void main_server::init_server(setup_data1 &setup_data_1, setup_data2 &setup_data
     ESPUI.addControl(ControlType::Option, "18", "17", data_einst.farbe, einst_id.Allgemein[2]);
     ESPUI.addControl(ControlType::Option, "19", "18", data_einst.farbe, einst_id.Allgemein[2]);
     ESPUI.addControl(ControlType::Option, "20", "19", data_einst.farbe, einst_id.Allgemein[2]);
-    einst_id.Allgemein[16] = ESPUI.addControl(ControlType::Text, "Name des Systems", String(update_data_1.hostname), data_einst.farbe, einst_id.Allgemein[0], &textCallback);
-    einst_id.Allgemein[3] = ESPUI.addControl(ControlType::Switcher, "Anmeldung aktivieren", String(update_data_1.login), data_einst.farbe, einst_id.Allgemein[0], &switchCallback);
-    einst_id.Allgemein[4] = ESPUI.addControl(ControlType::Text, "Benutzername", String(update_data_2.login[0]), data_einst.farbe, einst_id.Allgemein[0], &textCallback);
-    einst_id.Allgemein[5] = ESPUI.addControl(ControlType::Text, "Passwort", String(update_data_2.login[1]), data_einst.farbe, einst_id.Allgemein[0], &textCallback);
-    einst_id.Allgemein[17] = ESPUI.addControl(ControlType::Text, "SSID", String(update_data_1.ssid), data_einst.farbe, einst_id.Allgemein[0], &textCallback);
-    einst_id.Allgemein[18] = ESPUI.addControl(ControlType::Text, "Wifi Passwort", String(update_data_1.password), data_einst.farbe, einst_id.Allgemein[0], &textCallback);
-    einst_id.Allgemein[6] = ESPUI.addControl(ControlType::Text, "Wetter API Code", String(update_data_2.wetter[0]), data_einst.farbe, einst_id.Allgemein[0], &textCallback);
-    einst_id.Allgemein[7] = ESPUI.addControl(ControlType::Text, "Breitengrad", String(update_data_2.wetter[1]), data_einst.farbe, einst_id.Allgemein[0], &textCallback);
-    einst_id.Allgemein[8] = ESPUI.addControl(ControlType::Text, "Längengrad", String(update_data_2.wetter[2]), data_einst.farbe, einst_id.Allgemein[0], &textCallback);
-    einst_id.Allgemein[12] = ESPUI.addControl(ControlType::Select, "Farbe", String(data_einst.farb_id), data_einst.farbe, einst_id.Allgemein[0], &selectCallback);
+    einst_id.Allgemein[16] = ESPUI.addControl(ControlType::Text, language.name_of_system, String(update_data_1.hostname), data_einst.farbe, einst_id.Allgemein[0], &textCallback);
+    einst_id.Allgemein[3] = ESPUI.addControl(ControlType::Switcher, language.secure_ui_with_login, String(update_data_1.login), data_einst.farbe, einst_id.Allgemein[0], &switchCallback);
+    einst_id.Allgemein[4] = ESPUI.addControl(ControlType::Text, language.login_usr, String(update_data_2.login[0]), data_einst.farbe, einst_id.Allgemein[0], &textCallback);
+    einst_id.Allgemein[5] = ESPUI.addControl(ControlType::Text, language.login_psw, String(update_data_2.login[1]), data_einst.farbe, einst_id.Allgemein[0], &textCallback);
+    einst_id.Allgemein[17] = ESPUI.addControl(ControlType::Text, language.SSID, String(update_data_1.ssid), data_einst.farbe, einst_id.Allgemein[0], &textCallback);
+    einst_id.Allgemein[18] = ESPUI.addControl(ControlType::Text, language.psw, String(update_data_1.password), data_einst.farbe, einst_id.Allgemein[0], &textCallback);
+    einst_id.Allgemein[6] = ESPUI.addControl(ControlType::Text, language.weather_api, String(update_data_2.wetter[0]), data_einst.farbe, einst_id.Allgemein[0], &textCallback);
+    einst_id.Allgemein[7] = ESPUI.addControl(ControlType::Text, language.weather_latitude, String(update_data_2.wetter[1]), data_einst.farbe, einst_id.Allgemein[0], &textCallback);
+    einst_id.Allgemein[8] = ESPUI.addControl(ControlType::Text, language.weather_longitude, String(update_data_2.wetter[2]), data_einst.farbe, einst_id.Allgemein[0], &textCallback);
+    einst_id.Allgemein[12] = ESPUI.addControl(ControlType::Select, language.color, String(data_einst.farb_id), data_einst.farbe, einst_id.Allgemein[0], &selectCallback);
     ESPUI.addControl(ControlType::Option, "Türkis", "0", data_einst.farbe, einst_id.Allgemein[12]);
     ESPUI.addControl(ControlType::Option, "Emerald (Grün)", "1", data_einst.farbe, einst_id.Allgemein[12]);
     ESPUI.addControl(ControlType::Option, "Peterriver (Blau)", "2", data_einst.farbe, einst_id.Allgemein[12]);
@@ -1010,34 +1012,34 @@ void main_server::init_server(setup_data1 &setup_data_1, setup_data2 &setup_data
     ESPUI.addControl(ControlType::Option, "Alizerin (starkes Rot)", "6", data_einst.farbe, einst_id.Allgemein[12]);
     ESPUI.addControl(ControlType::Option, "Dunkel", "7", data_einst.farbe, einst_id.Allgemein[12]);
     ESPUI.addControl(ControlType::Option, "Keine", "8", data_einst.farbe, einst_id.Allgemein[12]);
-    ESPUI.addControl(ControlType::Label, "Bewässerung planen", "Bewässerung wird geplant, wenn :", data_einst.farbe, einst_id.Allgemein[0]);
-    einst_id.Allgemein[13] = ESPUI.addControl(ControlType::Slider, "Feuchte ist unter ...%", String(data_einst.min_feuchte), data_einst.farbe, einst_id.Allgemein[0], &sliderCallback);
-    einst_id.Allgemein[14] = ESPUI.addControl(ControlType::Select, "und kein Regen über .. angesagt ist:", String(data_einst.min_regen_id), data_einst.farbe, einst_id.Allgemein[0], &selectCallback);
-    ESPUI.addControl(ControlType::Option, "leicht", "0", data_einst.farbe, einst_id.Allgemein[14]);
-    ESPUI.addControl(ControlType::Option, "moderat", "1", data_einst.farbe, einst_id.Allgemein[14]);
-    ESPUI.addControl(ControlType::Option, "stark", "2", data_einst.farbe, einst_id.Allgemein[14]);
-    einst_id.Allgemein[15] = ESPUI.addControl(ControlType::Text, "zum zurücksetzten hier bitte ZURÜCKSETZEN eingeben und dann bestätigen", "willst du das wirklich?", data_einst.farbe, einst_id.Allgemein[0], &textCallback);
-    einst_id.Allgemein[9] = ESPUI.addControl(ControlType::Button, "Server zurücksetzen", "Drücken", data_einst.farbe, einst_id.Allgemein[0], &buttonCallback);
-    ESPUI.addControl(ControlType::Label, "Software Version:", String(update_data_1.versions_nr), data_einst.farbe, einst_id.Allgemein[0], &textCallback);
-    einst_id.Allgemein[19] = ESPUI.addControl(ControlType::Switcher, "Aktiviere OTA Update", String("0"), data_einst.farbe, einst_id.Allgemein[0], &switchCallback);
-    einst_id.beete_einst_tab_id = ESPUI.addControl(ControlType::Tab, "Beete Einstellungen", "Beete Einstellungen");
-    einst_id.Beete[0] = ESPUI.addControl(ControlType::Select, "Beet Auswählen", "99", data_einst.farbe, einst_id.beete_einst_tab_id, &selectCallback);
-    ESPUI.addControl(ControlType::Option, "bitte wähle ein Beet aus", "99", data_einst.farbe, einst_id.Beete[0]);
+    ESPUI.addControl(ControlType::Label, language.plan_irrigation_info, String(language.plan_irrigation_info_description), data_einst.farbe, einst_id.Allgemein[0]);
+    einst_id.Allgemein[13] = ESPUI.addControl(ControlType::Slider, language.moisture_under, String(data_einst.min_feuchte), data_einst.farbe, einst_id.Allgemein[0], &sliderCallback);
+    einst_id.Allgemein[14] = ESPUI.addControl(ControlType::Select, language.rain_over, String(data_einst.min_regen_id), data_einst.farbe, einst_id.Allgemein[0], &selectCallback);
+    ESPUI.addControl(ControlType::Option, language.light, "0", data_einst.farbe, einst_id.Allgemein[14]);
+    ESPUI.addControl(ControlType::Option, language.moderate, "1", data_einst.farbe, einst_id.Allgemein[14]);
+    ESPUI.addControl(ControlType::Option, language.heavy, "2", data_einst.farbe, einst_id.Allgemein[14]);
+    einst_id.Allgemein[15] = ESPUI.addControl(ControlType::Text, language.reset_info, String(language.reset_info_description), data_einst.farbe, einst_id.Allgemein[0], &textCallback);
+    einst_id.Allgemein[9] = ESPUI.addControl(ControlType::Button, language.reset_server, String(language.press), data_einst.farbe, einst_id.Allgemein[0], &buttonCallback);
+    ESPUI.addControl(ControlType::Label, language.software_version, String(update_data_1.versions_nr), data_einst.farbe, einst_id.Allgemein[0], &textCallback);
+    einst_id.Allgemein[19] = ESPUI.addControl(ControlType::Switcher, language.activate_ota_update, String("0"), data_einst.farbe, einst_id.Allgemein[0], &switchCallback);
+    einst_id.beete_einst_tab_id = ESPUI.addControl(ControlType::Tab, language.name_tab_bed_settings, String(language.name_tab_bed_settings));
+    einst_id.Beete[0] = ESPUI.addControl(ControlType::Select, language.choose_bed, "99", data_einst.farbe, einst_id.beete_einst_tab_id, &selectCallback);
+    ESPUI.addControl(ControlType::Option, language.please_choose_bed, "99", data_einst.farbe, einst_id.Beete[0]);
     for (int i = 0; i < setup_data_1.anzahl_beete; i++)
     {
         ESPUI.addControl(ControlType::Option, setup_data_2.beet_name[i], String(i), data_einst.farbe, einst_id.Beete[0]);
     }
-    einst_id.Beete[1] = ESPUI.addControl(ControlType::Text, "bitte gib den Namen dieses Beets an", "Beeter Call me", data_einst.farbe, einst_id.beete_einst_tab_id, &textCallback);
-    einst_id.Beete[2] = ESPUI.addControl(ControlType::Text, "IP ventil", "192.168.178.10", data_einst.farbe, einst_id.beete_einst_tab_id, &textCallback);
-    einst_id.Beete[3] = ESPUI.addControl(ControlType::Select, "genutztes Relay an Ventil server", "", data_einst.farbe, einst_id.beete_einst_tab_id, &selectCallback);
+    einst_id.Beete[1] = ESPUI.addControl(ControlType::Text, language.name_of_bed, "Beeter Call me", data_einst.farbe, einst_id.beete_einst_tab_id, &textCallback);
+    einst_id.Beete[2] = ESPUI.addControl(ControlType::Text, language.IP_relay, "192.168.178.10", data_einst.farbe, einst_id.beete_einst_tab_id, &textCallback);
+    einst_id.Beete[3] = ESPUI.addControl(ControlType::Select, language.used_relay, "", data_einst.farbe, einst_id.beete_einst_tab_id, &selectCallback);
     ESPUI.addControl(ControlType::Option, "1", "1", data_einst.farbe, einst_id.Beete[3]);
     ESPUI.addControl(ControlType::Option, "2", "2", data_einst.farbe, einst_id.Beete[3]);
     ESPUI.addControl(ControlType::Option, "3", "3", data_einst.farbe, einst_id.Beete[3]);
     ESPUI.addControl(ControlType::Option, "4", "4", data_einst.farbe, einst_id.Beete[3]);
     if (setup_data_1.bew_typ != 1)
     {
-        einst_id.Beete[4] = ESPUI.addControl(ControlType::Text, "IP Sensor ", "192.168.178.11", data_einst.farbe, einst_id.beete_einst_tab_id, &textCallback);
-        einst_id.Beete[5] = ESPUI.addControl(ControlType::Select, "standart Bewässerungszeit", "", data_einst.farbe, einst_id.beete_einst_tab_id, &selectCallback);
+        einst_id.Beete[4] = ESPUI.addControl(ControlType::Text, language.IP_sensor, "192.168.178.11", data_einst.farbe, einst_id.beete_einst_tab_id, &textCallback);
+        einst_id.Beete[5] = ESPUI.addControl(ControlType::Select, language.default_irrigation_time, "", data_einst.farbe, einst_id.beete_einst_tab_id, &selectCallback);
         ESPUI.addControl(ControlType::Option, "15 min", "15", data_einst.farbe, einst_id.Beete[5]);
         ESPUI.addControl(ControlType::Option, "30 min", "30", data_einst.farbe, einst_id.Beete[5]);
         ESPUI.addControl(ControlType::Option, "45 min", "45", data_einst.farbe, einst_id.Beete[5]);
@@ -1048,8 +1050,8 @@ void main_server::init_server(setup_data1 &setup_data_1, setup_data2 &setup_data
         ESPUI.addControl(ControlType::Option, "120 min", "120", data_einst.farbe, einst_id.Beete[5]);
     }
 
-    einst_id.Allgemein[10] = ESPUI.addControl(ControlType::Button, "Speichern", "DRÜCKEN", data_einst.farbe, einst_id.Allgemein[0], &buttonCallback);
-    einst_id.Allgemein[11] = ESPUI.addControl(ControlType::Button, "Speichern", "DRÜCKEN", data_einst.farbe, einst_id.beete_einst_tab_id, &buttonCallback);
+    einst_id.Allgemein[10] = ESPUI.addControl(ControlType::Button, language.save, String(language.press), data_einst.farbe, einst_id.Allgemein[0], &buttonCallback);
+    einst_id.Allgemein[11] = ESPUI.addControl(ControlType::Button, language.save, String(language.press), data_einst.farbe, einst_id.beete_einst_tab_id, &buttonCallback);
 
     if (setup_data_1.login == 1)
     {

@@ -16,7 +16,7 @@
 server_setup server_setup;
 main_server main_server;
 
-char versions_nr[40] = "Release 1.1";
+char versions_nr[40] = "debug 1.2 ENG";
 
 IPAddress apIP(192, 168, 178, 1);
 const byte DNS_PORT = 80;

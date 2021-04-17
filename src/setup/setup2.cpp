@@ -324,7 +324,7 @@ void server_setup::init_2(const char *ssid, const char *password, const char *ho
 
     ESPUI.setVerbosity(Verbosity::VerboseJSON);
 
-    uint16_t Allgemein = ESPUI.addControl(ControlType::Tab, language.name_tab_generally, String(language.name_tab_generally));
+    uint16_t Allgemein = ESPUI.addControl(ControlType::Tab, language.name_tab_general, String(language.name_tab_general));
 
     uint16_t Beete = ESPUI.addControl(ControlType::Tab, language.name_tab_bed, String(language.name_tab_bed));
 
@@ -353,26 +353,26 @@ void server_setup::init_2(const char *ssid, const char *password, const char *ho
     dev_button_id = ESPUI.addControl(ControlType::Button, "Setup zurück setzen:", "Drücken", ControlColor::Wetasphalt, Allgemein, &buttonCallback_set_2);
 #endif
 
-    id_init_2.ausgew_beet_id = ESPUI.addControl(ControlType::Select, "Beet_Auswählen", "99", ControlColor::Turquoise, Beete, &select_set_2);
+    id_init_2.ausgew_beet_id = ESPUI.addControl(ControlType::Select, language.choose_bed, "99", ControlColor::Turquoise, Beete, &select_set_2);
     const char *namen[20] = {"Beet 1", "Beet 2", "Beet 3", "Beet 4", "Beet 5", "Beet 6", "Beet 7", "Beet 8", "Beet 9", "Beet 10", "Beet 11", "Beet 12", "Beet 13", "Beet 14", "Beet 15", "Beet 16", "Beet 17", "Beet 18", "Beet 19", "Beet 20"};
-    ESPUI.addControl(ControlType::Option, "bitte wählen sie ein Beet aus", "99", ControlColor::Alizarin, id_init_2.ausgew_beet_id);
+    ESPUI.addControl(ControlType::Option, language.please_choose_a_bed, "99", ControlColor::Alizarin, id_init_2.ausgew_beet_id);
     for (int i = 0; i < setup_data_1.anzahl_beete; i++)
     {
         ESPUI.addControl(ControlType::Option, namen[i], String(i), ControlColor::Alizarin, id_init_2.ausgew_beet_id);
     }
-    id_init_2.id_beet.id_name = ESPUI.addControl(ControlType::Text, "Bitte gib den Namen dieses Beets an", "Das Krasseste Beet", ControlColor::Alizarin, Beete, &textCall_set_2);
-    ESPUI.addControl(ControlType::Label, "info zu den IP eingaben", "Da der Code des Ventil Server bis zu 4 Relays pro ESP unterstützt, gib unter der Ip an, welches Relay du genutzt hast. falls du nur ein Relay von dem server nutzt wähle 1 aus. falls du mehrere nutzt, trage bei allen genutzten die selbe IP ein und wähle dann das passende Relay.", ControlColor::Turquoise, Beete);
-    id_init_2.id_beet.id_ip_relay = ESPUI.addControl(ControlType::Text, "IP Relay", "192.168.178.10", ControlColor::Alizarin, Beete, &textCall_set_2);
-    id_init_2.id_beet.id_ip_relay_nr = ESPUI.addControl(ControlType::Select, "genutztes Relay an Ventil server ESP", "", ControlColor::Alizarin, Beete, &select_set_2);
+    id_init_2.id_beet.id_name = ESPUI.addControl(ControlType::Text, language.name_of_bed, "Das Krasseste Beet", ControlColor::Alizarin, Beete, &textCall_set_2);
+    ESPUI.addControl(ControlType::Label, language.IP_info, String(language.IP_info_description), ControlColor::Turquoise, Beete);
+    id_init_2.id_beet.id_ip_relay = ESPUI.addControl(ControlType::Text, language.IP_relay, "192.168.178.10", ControlColor::Alizarin, Beete, &textCall_set_2);
+    id_init_2.id_beet.id_ip_relay_nr = ESPUI.addControl(ControlType::Select, language.used_relay, "", ControlColor::Alizarin, Beete, &select_set_2);
     ESPUI.addControl(ControlType::Option, "1", "1", ControlColor::Alizarin, id_init_2.id_beet.id_ip_relay_nr);
     ESPUI.addControl(ControlType::Option, "2", "2", ControlColor::Alizarin, id_init_2.id_beet.id_ip_relay_nr);
     ESPUI.addControl(ControlType::Option, "3", "3", ControlColor::Alizarin, id_init_2.id_beet.id_ip_relay_nr);
     ESPUI.addControl(ControlType::Option, "4", "4", ControlColor::Alizarin, id_init_2.id_beet.id_ip_relay_nr);
     if (bew_typ != 1)
     {
-        ESPUI.addControl(ControlType::Label, "info zu Bewässerungszeit", "die Bewässerungszeit solltest du dir errechnen aus, bewässerungs leistung deines schlauchs und beetgröße, diese einstellung kannst du später noch ändern.", ControlColor::Turquoise, Beete);
-        id_init_2.id_beet.id_ip_sensor = ESPUI.addControl(ControlType::Text, "IP Sensor ", "192.168.178.11", ControlColor::Alizarin, Beete, &textCall_set_2);
-        id_init_2.id_beet.id_stand_bew_zeit = ESPUI.addControl(ControlType::Select, "Standart Bewässerungs zeit", "", ControlColor::Alizarin, Beete, &select_set_2);
+        ESPUI.addControl(ControlType::Label, language.info_irrigation_time, String(language.info_irrigation_time_description), ControlColor::Turquoise, Beete);
+        id_init_2.id_beet.id_ip_sensor = ESPUI.addControl(ControlType::Text, language.IP_sensor, "192.168.178.11", ControlColor::Alizarin, Beete, &textCall_set_2);
+        id_init_2.id_beet.id_stand_bew_zeit = ESPUI.addControl(ControlType::Select, language.default_irrigation_time, "", ControlColor::Alizarin, Beete, &select_set_2);
         ESPUI.addControl(ControlType::Option, "15 min", "15", ControlColor::Alizarin, id_init_2.id_beet.id_stand_bew_zeit);
         ESPUI.addControl(ControlType::Option, "30 min", "30", ControlColor::Alizarin, id_init_2.id_beet.id_stand_bew_zeit);
         ESPUI.addControl(ControlType::Option, "45 min", "45", ControlColor::Alizarin, id_init_2.id_beet.id_stand_bew_zeit);
@@ -383,7 +383,7 @@ void server_setup::init_2(const char *ssid, const char *password, const char *ho
         ESPUI.addControl(ControlType::Option, "120 min", "120", ControlColor::Alizarin, id_init_2.id_beet.id_stand_bew_zeit);
     }
 
-    id_init_2.absenden = ESPUI.addControl(ControlType::Button, "Angaben Bestätigen:", "Drücken", ControlColor::Wetasphalt, Beete, &buttonCallback_set_2);
+    id_init_2.absenden = ESPUI.addControl(ControlType::Button, language.confirm_changes, language.press, ControlColor::Wetasphalt, Beete, &buttonCallback_set_2);
     ESPUI.begin(setup_data_1.hostname);
 };
 
