@@ -122,6 +122,7 @@ Hier folgt in Kürze ein Video
 1.3 Nach der Einrichtung stelle bei deinem Router ein, dass die IP des ESP32 immer gleich bleibt.<br><br>
 2. <a href="https://github.com/RubiRubsn/feuchte_server">Klone das Repository für den Feuchteserver</a>  und trage die SSID und das Passwort deines Netzwerks ein. 
 2.1(optional) Lege den Namen für den optionalen Zugriff per mDNS fest. (Version 1.0 des Hauptservers unterstützt noch keine mDNS Auflösung)<br>
+
 ```sh
 12 const char *SSID = "******";
 13 const char *PSW = "****";
