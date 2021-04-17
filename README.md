@@ -17,7 +17,7 @@
     ·
     <a href="https://github.com/RubiRubsn/Bewaesserungs-Anlage-System-ESP/issues">Bugs melden</a>
     ·
-    <a href="https://github.com/RubiRubsn/Bewaesserungs-Anlage-System-ESP/issues">Features anfrage</a>
+    <a href="https://github.com/RubiRubsn/Bewaesserungs-Anlage-System-ESP/issues">Features anfragen</a>
   </p>
 </p>
 
