@@ -4,7 +4,6 @@
 
 #if defined(ESP32)
 #include <WiFi.h>
-#include <ESPmDNS.h>
 #else
 #include <ESP8266WiFi.h>
 #endif
@@ -16,7 +15,7 @@
 server_setup server_setup;
 main_server main_server;
 
-char versions_nr[40] = "debug 1.2 ENG";
+char versions_nr[40] = "debug 1.2 GER";
 
 IPAddress apIP(192, 168, 178, 1);
 const byte DNS_PORT = 80;
@@ -85,12 +84,6 @@ void setup()
   Serial.println("\n\nWiFi parameters:");
   Serial.print("IP address: ");
   Serial.println(WiFi.getMode() == WIFI_AP ? WiFi.softAPIP() : WiFi.localIP());
-
-  if (!MDNS.begin(server_setup.setup_data_1.hostname))
-  {
-    Serial.println("Error starting mDNS");
-    return;
-  }
 
   if (server_setup.setup_data_2.setup_zust != 2 && server_setup.setup_data_2.setup_zust != 99)
   {

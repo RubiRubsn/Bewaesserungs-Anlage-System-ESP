@@ -1,6 +1,6 @@
 #include <Arduino.h>
 
-#define lang 'E'
+#define lang 'G'
 
 #if lang == 'G'
 
