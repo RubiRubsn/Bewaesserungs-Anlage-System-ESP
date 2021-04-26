@@ -34,7 +34,7 @@ void setup()
   {
     strcpy(server_setup.setup_data_1.hostname, "Einrichtung");
   }
-  ESPUI.jsonInitialDocumentSize = 30000;
+  ESPUI.jsonInitialDocumentSize = 40000;
   //dev
   /*
   server_setup.setup_data_2.setup_zust = 99;

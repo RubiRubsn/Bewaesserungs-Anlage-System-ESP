@@ -1075,6 +1075,11 @@ void main_server::init_server(setup_data1 &setup_data_1, setup_data2 &setup_data
     ausgew_beet = 0;
     load_flaggs.update_UI = true;
     init_ota_update(update_data_1, update_data_2);
+
+    ESPUI.server->on("/restart", HTTP_GET, [&](AsyncWebServerRequest *request) {
+        request->send(200, "text/plain", "neustarten");
+        load_flaggs.save_data = true;
+    });
 }
 
 bool main_server::flaggs_abfragen(setup_data1 &setup_data_1, setup_data2 &setup_data_2)
