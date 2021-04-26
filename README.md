@@ -40,15 +40,15 @@
       </ul>
     </li>
     <li><a href="#Schaltungen">Schaltungen</a></li>
-    <li><a href="#Danksagung">Danke an!</a></li>
+    <li><a href="#Danksagung">Danksagung!</a></li>
   </ol>
 </details>
 
 <!-- ABOUT THE PROJECT -->
 
-## #Über das Projekt
+### Über das Projekt
 
-Das Ziel dieser Software ist es, ein gut funktionierendes teilautomatisiertes Bewässerungssystem zu sein.
+Das Ziel dieser Software ist, ein gut funktionierendes teilautomatisiertes Bewässerungssystem.
 Das System kann in 3 verschiedenen Modi betrieben werden.<br>
 
 1. Manuell <br>
@@ -57,16 +57,16 @@ Das System kann in 3 verschiedenen Modi betrieben werden.<br>
 2. Automatisiert mit Feuchtesensoren<br>
     Hier wird anhand von Feuchtesensoren die Feuchte im Beet gemessen und daran entschieden, ob bewässert werden soll.
 
-3. Automatisiert mit Feuchtesensoren und Wetter vorhersage<br>
+3. Automatisiert mit Feuchtesensoren und Wettervorhersage<br>
     Hier wird anhand von Feuchtesensoren die Feuchte im Beet gemessen und in Zusammenspiel mit der Wettervorhersage entschieden, ob bewässert werden soll.
 
 <br>!!ACHTUNG in Version 1.- ist nur Modi 3 und 1 Nutzbar!! <br><br>
 
 Als Hauptserver dient ein ESP32 auf dem mit Hilfe der Bibliothek <a href="https://github.com/s00500/ESPUI">ESPUI von s00500</a> ein Webinterface gestaltet wurde.
 Dieser Server sammelt die Feuchtewerte und plant auch die Bewässerung. Da dieser Server nur die Bewässerung startet, stoppt die Bewässerung automatisch auch im Falle eines Absturz des Systems.<br>
-Dieser Server kann mit Freigaben auch öffentlich erreicht werden. Ich habe dies mit Hilfe von <a href="https://myfritz.net/">MY!FRITZ</a> realisiert. (setzt die Nutzung einer Fritz!box voraus). <br>
+Dieser Server kann mit Freigaben auch öffentlich erreicht werden. Dies wurde mit Hilfe von<a href="https://myfritz.net/">MY!FRITZ</a> realisiert (setzt die Nutzung einer Fritz!box voraus). <br>
 Es gibt 2 weitere Typen von Servern, ein Feuchteserver und ein Ventilserver. Beide Server werden mit ESP8266 realisiert.<br>
-Der Feuchteserver sendet auf Anfrage des Hauptservers die Feuchte an den Server. Dieser Feuchteserver kann direkt am Beet angebracht werden.
+Der Feuchteserver sendet auf Anfrage des Hauptservers die Feuchte an den Hauptserver. Dieser Feuchteserver kann direkt am Beet angebracht werden.
 Der Ventilserver kann in 3 verschiedenen Modi betrieben werden. <br>
 
 1. Nutzung von bis zu vier Ventilen pro Server am Trinkwasseranschluss
@@ -81,25 +81,25 @@ Die Oberfläche unterstützt bis zu 20 Beete. Das aktuelle Wetter und auch die a
 
 [![Allgemein Screenshot][product-screenshot]]()
 
-Im Tab "Beete" ist eine detallierte Betrachtung jedes Beets möglich. Vom Ventilzustand, bis hin zur manuellen Bewässerung oder auch ob eine automatisierte Bewässerung geplant ist, erfährst du alles hier.<br>
+Im Tab "Beete" ist eine detallierte Betrachtung jedes Beets möglich. Vom Ventilzustand, bis hin zur manuellen Bewässerung oder auch ob eine automatisierte Bewässerung geplant ist, erfährst man hier alles.<br>
 
 [![Beete Screenshot][beet-screenshot]]()
 
-Im Tab "Allgemeine Einstellungen" findest du Einstellungen, wie: <br> - ob deine Oberfläche passwortgeschützt sein soll <br> - Einstellung der automatischen Bewässerungskriterien.<br>
+Im Tab "Allgemeine Einstellungen" findest man Einstellungen, wie: <br> - ob deine Oberfläche passwortgeschützt sein soll <br> - Einstellung der automatischen Bewässerungskriterien.<br>
 
 [![einst Screenshot][einst-screenshot]]()
 
-Im Tab "Beete Einstellungen" kannst du alles zu den Beeten einstellen. wie: <br> -  den Namen der Beete <br> - die Adressen der Feuchte- bzw Ventilsensoren <br> - die Standartbewässerungszeit der Beete<br>
+Im Tab "Beete Einstellungen" kannst man alles zu den Beeten einstellen, wie: <br> -  den Namen der Beete <br> - die Adressen der Feuchte- bzw Ventilsensoren <br> - die Standartbewässerungszeit der Beete<br>
 
 [![beet einst Screenshot][beeteinst-screenshot]]()
 
 
-### Was brauche ich
+### Was brauche man
 
 Für die Nutzung der Oberfläche ist ein kostenloser Zugang zur <a href="https://openweathermap.org/api">Openweathermap API</a> notwendig.
-Nach der Anmeldung erhälst du einen API-Schlüssel den du im Einrichtungsprozess in der Weboberfläche eintragen kannst.<br>
+Nach der Anmeldung erhälst man einen API-Schlüssel den man im Einrichtungsprozess in der Weboberfläche eintragen kannst.<br>
 Als Ventile für das Wasser nutze ich: <a href="https://www.amazon.de/gp/product/B06XCSVZPT/ref=ppx_yo_dt_b_asin_image_o02_s01?ie=UTF8&psc=1">UEETEK 1/2 Zoll 12V Elektro Magnetventile</a>.<br>
-Als Relais für die Ventile nutze ich <a href="https://www.amazon.de/gp/product/B07TZ778VH/ref=ppx_yo_dt_b_asin_title_o02_s00?ie=UTF8&psc=1">eine standart 4er Relai Platine</a>.<br>
+Als Relais für die Ventile nutze ich <a href="https://www.amazon.de/gp/product/B07TZ778VH/ref=ppx_yo_dt_b_asin_title_o02_s00?ie=UTF8&psc=1">eine Standart 4er Relai Platine</a>.<br>
 Als Feuchtesensoren nutze ich <a href="https://www.az-delivery.de/products/bodenfeuchte-sensor-modul-v1-2?_pos=6&_sid=22262207f&_ss=r">capacitiv soil moisture Sensor v1.2</a>, deren Ende (also der belötete Teil der Platine) ich mit Hilfe eines Plastikshotglases in Epoxidharz eingegossen habe. <br>
 Dieser Sensor wird auch für die Füllstandmessung im Regenfass benutzt (Optional).<br>
 Als Hauptserver habe ich den <a href="https://www.az-delivery.de/products/esp32-dev-kit-c-unverlotet?_pos=5&_sid=72925e31b&_ss=r">ESP32 Dev Kit c</a> verwendet.<br>
