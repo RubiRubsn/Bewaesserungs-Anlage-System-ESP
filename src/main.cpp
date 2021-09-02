@@ -15,7 +15,7 @@
 server_setup server_setup;
 main_server main_server;
 
-char versions_nr[40] = "debug 1.2 GER";
+char versions_nr[40] = "debug 1.3.0 GER";
 
 IPAddress apIP(192, 168, 178, 1);
 const byte DNS_PORT = 80;
@@ -34,6 +34,7 @@ void setup()
   {
     strcpy(server_setup.setup_data_1.hostname, "Einrichtung");
   }
+
   ESPUI.jsonInitialDocumentSize = 40000;
   //dev
   /*

@@ -1,8 +1,10 @@
 #include <Arduino.h>
 
-#define lang 'G'
+#define LANG GER
 
-#if lang == 'G'
+#define GER 'G'
+
+#if LANG == GER
 
 struct lang_setup_1
 {

@@ -1,6 +1,6 @@
 #include <DNSServer.h>
 #include <ESPUI.h>
-
+#include <arduino.h>
 #if defined(ESP32)
 #include <WiFi.h>
 #include <AsyncTCP.h>
@@ -31,7 +31,7 @@ flaggs main_server::load_flaggs;
 uint8_t main_server::ausgew_beet = 99;
 uint8_t main_server::manuelle_bew_zeit[20];
 
-const char *OTA_INDEX PROGMEM = R"=====(<!DOCTYPE html><html><head><meta charset=utf-8><title>OTA</title></head><body><div class="upload"><form method="POST" action="/ota" enctype="multipart/form-data"><input type="file" name="data" /><input type="submit" name="upload" value="Upload" title="Upload Files"></form></div></body></html>)=====";
+const char *OTA_INDEX PROGMEM = R"=====(<!DOCTYPE html><html><head><meta charset=utf-8><title>OTA</title></head><body><div class=" upload "><form method=" POST " action=" / ota " enctype=" multipart / form - data "><input type=" file " name=" data " /><input type=" submit " name=" upload " value=" Upload " title=" Upload Files "></form></div></body></html>)=====";
 
 void main_server::handleOTAUpload(AsyncWebServerRequest *request, String filename, size_t index, uint8_t *data, size_t len, bool final)
 {
@@ -67,7 +67,8 @@ void main_server::handleOTAUpload(AsyncWebServerRequest *request, String filenam
 void main_server::init_ota_update(setup_data1 update_data_1, setup_data2 update_data_2)
 {
     ESPUI.server->on(
-        "/ota", HTTP_POST, [&](AsyncWebServerRequest *request) {
+        "/ota", HTTP_POST, [&](AsyncWebServerRequest *request)
+        {
             if (!aktiviere_ota_update)
             {
                 return request->redirect("/");
@@ -79,17 +80,18 @@ void main_server::init_ota_update(setup_data1 update_data_1, setup_data2 update_
         },
         handleOTAUpload);
 
-    ESPUI.server->on("/ota", HTTP_GET, [&](AsyncWebServerRequest *request) {
-        if (!aktiviere_ota_update)
-        {
-            return request->redirect("/");
-        }
-        else
-        {
-            AsyncWebServerResponse *response = request->beginResponse_P(200, "text/html", OTA_INDEX);
-            request->send(response);
-        }
-    });
+    ESPUI.server->on("/ota", HTTP_GET, [&](AsyncWebServerRequest *request)
+                     {
+                         if (!aktiviere_ota_update)
+                         {
+                             return request->redirect("/");
+                         }
+                         else
+                         {
+                             AsyncWebServerResponse *response = request->beginResponse_P(200, "text/html", OTA_INDEX);
+                             request->send(response);
+                         }
+                     });
 };
 
 void main_server::update_data_ex(setup_data1 &setup_data_1, setup_data2 &setup_data_2)
@@ -1076,10 +1078,16 @@ void main_server::init_server(setup_data1 &setup_data_1, setup_data2 &setup_data
     load_flaggs.update_UI = true;
     init_ota_update(update_data_1, update_data_2);
 
-    ESPUI.server->on("/restart", HTTP_GET, [&](AsyncWebServerRequest *request) {
-        request->send(200, "text/plain", "neustarten");
-        load_flaggs.save_data = true;
-    });
+    ESPUI.server->on("/restart", HTTP_GET, [&](AsyncWebServerRequest *request)
+                     {
+                         request->redirect("/");
+                         load_flaggs.save_data = true;
+                     });
+    ESPUI.server->on("/reload", HTTP_GET, [&](AsyncWebServerRequest *request)
+                     {
+                         request->redirect("/");
+                         ESPUI.jsonDom();
+                     });
 }
 
 bool main_server::flaggs_abfragen(setup_data1 &setup_data_1, setup_data2 &setup_data_2)
