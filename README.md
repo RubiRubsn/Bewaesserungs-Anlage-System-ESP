@@ -94,7 +94,7 @@ Im Tab "Beete Einstellungen" kannst man alles zu den Beeten einstellen, wie: <br
 [![beet einst Screenshot][beeteinst-screenshot]]()
 
 
-### Was brauche man
+### Was-brauche-ich
 
 Für die Nutzung der Oberfläche ist ein kostenloser Zugang zur <a href="https://openweathermap.org/api">Openweathermap API</a> notwendig.
 Nach der Anmeldung erhälst man einen API-Schlüssel den man im Einrichtungsprozess in der Weboberfläche eintragen kannst.<br>
