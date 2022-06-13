@@ -7,6 +7,8 @@
 
   <h3 align="center">Bewässerungsanlage</h3>
 
+<h3 align="center">ACHTUNG version 2 ist geplant für Herbst 2022</h3>
+
   <p align="center">
     Programmiert für die ESP-Plattform mit PlatformIO
     <br />
